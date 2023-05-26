@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({super.key, required this.name, required this.task});
+  CustomButton({super.key, required this.name, required this.task,});
 
   String name;
   Function task;
