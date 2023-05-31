@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:haylo_app/View/Common%20Widgets/responsive_calculator.dart';
 
 import '../Constants/colors.dart';
 
@@ -27,10 +27,13 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        onSubmitted:  (value) {
+                FocusScope.of(context).nextFocus();
+              },
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: GoogleFonts.poppins(
-            fontSize: 13,
+            fontSize: 13.sp,
             color: Color(0xFF747474)
           ),
           contentPadding:

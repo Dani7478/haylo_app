@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:haylo_app/Controller/Authentication/forgotpassword_controller.dart';
-import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
+import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:haylo_app/View/Screens/Authentication/varification_code_view.dart';
-import '../../Common Widgets/common_text.dart';
-import '../../Common Widgets/custom_button2.dart';
-import '../../Common Widgets/custom_textfield.dart';
-import '../../Common Widgets/responsive_calculator.dart';
+import '../../Common Widgets/widgets_links.dart';
 import 'package:get/get.dart';
+
+import '../../Constants/images.dart';
 
 
 class ForgotPasswordView extends StatelessWidget {
@@ -21,96 +20,70 @@ class ForgotPasswordView extends StatelessWidget {
 
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: screenHeight,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                //_____________________TOP BACK ARROW
-                SizedBox(
-                  width: screenWidth,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: screenHeight * 0.03,
-                          child: Center(
-                            child: Icon(
-                              Icons.keyboard_arrow_left,
-                              color: Colors.black45,
-                              size: screenHeight * 0.05,
-                            ),
-                          ),
-                        ),
-                      ),
+      body: SizedBox(
+        height: screenHeight,
+        width: screenWidth,
+        child: Padding(
+          padding:  EdgeInsets.only(top: 28.h, left: 15, right: 15),
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+            const BackMoveAppBar(),
+             SizedBox(height: 42.h,),
+
+               SizedBox(
+                height:135.h,
+                width: 203.w,
+                //color: Colors.purple,
+                child: Image.asset(forgotPasswordImg, ),
+              ),
+              SizedBox(height: 30.h,),
+
+              //__________________MID TEXT
+              SizedBox(
+                width: double.infinity,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Forgot Password',
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                //_____________________TOP HEADER IMAGE
+              ),
+              SizedBox(height: 10.h,),
 
-                Container(
-                  height: screenHeight * 0.3,
-                  width: screenHeight * 0.3,
-                  //color: Colors.purple,
-                  child: Image.asset('assets/images/forgot-password.png', fit: BoxFit.fitWidth,),
-                ),
-
-                //__________________MID TEXT
-                SizedBox(
-                  width: double.infinity,
-                  child: Align(
-                    alignment: Alignment.center,
+              SizedBox(
+                width: double.infinity,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Center(
                     child: Text(
-                      'Forgot Password',
+                      'Provide your account email for which you want \n to reset the password',
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         color: Colors.black,
-                        fontSize: calculateFontSize(context, 24),
-                        fontWeight: FontWeight.w700,
+                        fontSize: 13.h,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),
                 ),
+              ),
 
-                SizedBox(
-                  width: double.infinity,
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Center(
-                      child: Text(
-                        'Provide your account email for which you want \n to reset the password',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: calculateFontSize(context, 13),
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              //________________EMAIL SECTION
+              EmailSection(height: screenHeight),
 
-                //________________EMAIL SECTION
-                Expanded(
-                  child: EmailSection(height: screenHeight),
-                ),
+              SizedBox(height: 80.h,),
 
-                //_______________FORGOT BUTTON
-                Padding(
-                  padding: EdgeInsets.only(left: 25, right: 25, bottom: 110),
-                  child: CustomButton2(name: 'Next', task: () {
-                    moveLTR(screen: const VarificationCodeView());
-                  }),
-                ),
-              ],
-            ),
+              //_______________FORGOT BUTTON
+              CustomButton2(name: 'Next', task: () {
+                moveLTR(screen: const VarificationCodeView());
+              }),
+            ],
           ),
         ),
       ),

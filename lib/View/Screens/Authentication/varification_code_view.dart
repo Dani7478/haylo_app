@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haylo_app/Controller/Authentication/forgotpassword_controller.dart';
+import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
+import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import '../../Common Widgets/common_text.dart';
 import '../../Common Widgets/custom_button2.dart';
 import '../../Common Widgets/custom_textfield.dart';
-import '../../Common Widgets/responsive_calculator.dart';
 import 'package:get/get.dart';
 
 import '../../Common Widgets/varificationcode_input.dart';
+import '../../Constants/images.dart';
 
 
 class VarificationCodeView extends StatelessWidget {
@@ -60,7 +62,7 @@ class VarificationCodeView extends StatelessWidget {
                   height: screenHeight * 0.3,
                   width: screenHeight * 0.3,
                   //color: Colors.purple,
-                  child: Image.asset('assets/images/forgot-password.png', fit: BoxFit.fitWidth,),
+                  child: Image.asset(forgotPasswordImg, fit: BoxFit.fitWidth,),
                 ),
 
                 //__________________MID TEXT
@@ -130,7 +132,9 @@ class VarificationCodeView extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 8.0,),
-                      CustomButton2(name: 'Next', task: () {})
+                      CustomButton2(name: 'Next', task: () {
+                        moveUTD(screen: LoginView());
+                      })
                     ],
                   ),
                 ),
