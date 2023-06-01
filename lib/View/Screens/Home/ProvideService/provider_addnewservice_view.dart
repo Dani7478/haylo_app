@@ -5,6 +5,8 @@ import 'package:haylo_app/View/Common%20Widgets/backmove_appbar.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 
+import '../BookService/paymentdone_view.dart';
+
 class ProviderAddNewServiceView extends StatelessWidget {
   const ProviderAddNewServiceView({Key? key}) : super(key: key);
 
@@ -189,8 +191,11 @@ class ProviderAddNewServiceView extends StatelessWidget {
                 ),
               ),
             ),
-            
-            CustomButton2(name:'Next', task: (){})
+            SizedBox(height: 100.h,),
+
+            CustomButton2(name:'Next', task: (){
+              moveRTL(screen: const PaymentDoneView());
+            })
           ],
         ),
       ),

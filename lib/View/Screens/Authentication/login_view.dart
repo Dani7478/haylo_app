@@ -11,6 +11,7 @@ import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Common%20Widgets/social_button.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Authentication/forgot_password.dart';
+import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerhome_view.dart';
 import 'package:haylo_app/View/Screens/Home/signup_selection.dart';
 import '../../Common Widgets/widgets_links.dart';
 import '../../Constants/colors.dart';
@@ -123,7 +124,9 @@ class LoginView extends StatelessWidget {
               SizedBox(
                 height:20.h,
               ),
-              CustomButton2(name: 'Login', task: () {}),
+              CustomButton2(name: 'Login', task: () {
+                moveUTD(screen: const BookerHomeView());
+              }),
                SizedBox(
                 height:5.h,
               ),

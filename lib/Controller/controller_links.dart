@@ -7,3 +7,4 @@ export 'Home/ProvideService/provideservice_formcontroller.dart';
 export 'Home/ProvideService/provider_category_formcontroller.dart';
 export 'Home/ProvideService/providerpayment_formcontroller.dart';
 export 'Home/ProvideService/providerpayment_formcontroller2.dart';
+export 'Home/MainHome/Booker/booker_bottomappbar_controller.dart';

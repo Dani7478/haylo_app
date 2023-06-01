@@ -14,6 +14,9 @@ String addPaymentImg='assets/images/Group 1000003457.png';
 String donePaymentImg='assets/images/Group 1000003391.png';
 String provideService1='assets/images/Mask Group 42.png';
 String provideService2='assets/images/Mask Group 85.png';
+String profileImage='assets/images/Mask Group 1.png';
+String chatImage1='assets/images/User img.png';
+String chatImage2='assets/images/Photo.png';
 
 
 
