@@ -32,6 +32,9 @@ class ProvideServiceFormView extends StatelessWidget {
                   align: TextAlign.start),
 
               //________________Sub Text
+               SizedBox(
+                height: 5.h,
+              ),
 
               MainTextWidget(
                   text: 'Connect with us today!',
@@ -48,6 +51,9 @@ class ProvideServiceFormView extends StatelessWidget {
                 radius: 50.h,
                 backgroundColor: grayColor,
                 child: Image.asset(profileCircleImg),
+              ),
+               SizedBox(
+                height: 5.h,
               ),
 
               MainTextWidget(
@@ -85,7 +91,7 @@ class ProvideServiceFormView extends StatelessWidget {
               ),
 
               //__________________________EMAIL
-              CommonText(text: 'Email'),
+              CommonText(text: 'Email Address'),
               SizedBox(
                 height: 5.h,
               ),
@@ -105,7 +111,7 @@ class ProvideServiceFormView extends StatelessWidget {
               CustomTextField(
                   controller: controller.firstNameCtrl,
                   hintText: 'Enter Your Password',
-                  abscr: false),
+                  abscr: true),
 
               //______________________TERMS COND
               //________________________________REMEMBER SECTION
@@ -133,6 +139,9 @@ class ProvideServiceFormView extends StatelessWidget {
                   task: () {
                     moveRTL(screen:  const ProvideGategoryFormView());
                   }),
+                   SizedBox(
+                height: 8.h,
+              ),
               OrSection(
                 text: 'or sign Up with',
               ),

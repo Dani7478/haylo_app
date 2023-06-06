@@ -39,6 +39,9 @@ class ProviderPaymentFormView extends StatelessWidget {
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600,
                   align: TextAlign.left),
+                    SizedBox(
+                height: 8.h,
+              ),
               MainTextWidget(
                   text:
                       'This details will require to make your stripe \nconnect account',
@@ -149,7 +152,7 @@ class MainForm extends StatelessWidget {
 
 
           MainTextWidget(
-              text: 'State',
+              text: 'City',
               fontColor: Colors.black,
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
@@ -166,7 +169,7 @@ class MainForm extends StatelessWidget {
           ),
 
           MainTextWidget(
-              text: 'State',
+              text: 'Address',
               fontColor: Colors.black,
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
@@ -183,7 +186,7 @@ class MainForm extends StatelessWidget {
           ),
 
           MainTextWidget(
-              text: 'State',
+              text: 'Postal code',
               fontColor: Colors.black,
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
@@ -200,7 +203,7 @@ class MainForm extends StatelessWidget {
           ),
 
           MainTextWidget(
-              text: 'State',
+              text: 'National Id /SSN',
               fontColor: Colors.black,
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,

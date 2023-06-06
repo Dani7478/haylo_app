@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
+import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
+import 'package:haylo_app/View/Screens/Universal/chatting_view.dart';
+import '../../Constants/colors.dart';
 
-import '../../../../Constants/colors.dart';
+class ChatListView extends StatelessWidget {
+   ChatListView({Key? key, required this.role}) : super(key: key);
 
-class BookerChatListView extends StatelessWidget {
-  const BookerChatListView({Key? key}) : super(key: key);
+  String role;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +37,20 @@ class BookerChatListView extends StatelessWidget {
               color: Color(0xFFE8E8E8),
             ),
 
-            chatViewCard(
+           GestureDetector(
+            onTap: (){
+              moveUTD(
+                screen: const ChatttingView(),
+              );
+            },
+            child:  chatViewCard(
               name: 'Name 1 ',
               image: chatImage1,
               message: 'I just invited you and Jacob to dinner on Friday. You better be there',
               date: '5 Min ago'
             ),
+           ),
+           
 
             chatViewCard(
                 name: 'Name 1 ',
@@ -114,7 +125,7 @@ class BookerChatListView extends StatelessWidget {
                     ),
 
 
-                     Divider(
+                    const Divider(
                       thickness: 1,
                       color: Colors.black
                     ),

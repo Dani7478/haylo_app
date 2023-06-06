@@ -8,4 +8,10 @@ class BookProfileFormController extends GetxController {
   TextEditingController passwordCtrl = TextEditingController();
 
   bool isTermsOk=false;
+
+  changedIsTermsOk(){
+  bool isTermsOk=false;
+    isTermsOk=!isTermsOk;
+    update();
+  }
 }

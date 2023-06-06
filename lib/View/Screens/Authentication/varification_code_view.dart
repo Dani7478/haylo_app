@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haylo_app/Controller/Authentication/forgotpassword_controller.dart';
@@ -12,7 +13,6 @@ import 'package:get/get.dart';
 import '../../Common Widgets/varificationcode_input.dart';
 import '../../Constants/images.dart';
 
-
 class VarificationCodeView extends StatelessWidget {
   const VarificationCodeView({Key? key}) : super(key: key);
 
@@ -20,7 +20,6 @@ class VarificationCodeView extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-
 
     return Scaffold(
       body: SafeArea(
@@ -34,7 +33,8 @@ class VarificationCodeView extends StatelessWidget {
                 SizedBox(
                   width: screenWidth,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 10),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: InkWell(
@@ -62,7 +62,10 @@ class VarificationCodeView extends StatelessWidget {
                   height: screenHeight * 0.3,
                   width: screenHeight * 0.3,
                   //color: Colors.purple,
-                  child: Image.asset(forgotPasswordImg, fit: BoxFit.fitWidth,),
+                  child: Image.asset(
+                    forgotPasswordImg,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
 
                 //__________________MID TEXT
@@ -80,6 +83,9 @@ class VarificationCodeView extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 8.h,
                 ),
 
                 SizedBox(
@@ -108,10 +114,11 @@ class VarificationCodeView extends StatelessWidget {
 
                 //_______________FORGOT BUTTON
                 Padding(
-                  padding: EdgeInsets.only(left: 25, right: 25, bottom: screenHeight*0.1),
-                  child:Column(
+                  padding: EdgeInsets.only(
+                      left: 25, right: 25, bottom: screenHeight * 0.1),
+                  child: Column(
                     children: [
-                      const  Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -121,7 +128,9 @@ class VarificationCodeView extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400),
                           ),
-                          SizedBox(width: 8,),
+                          SizedBox(
+                            width: 8,
+                          ),
                           Text(
                             ': 30 Sec',
                             style: TextStyle(
@@ -131,10 +140,14 @@ class VarificationCodeView extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(height: 8.0,),
-                      CustomButton2(name: 'Next', task: () {
-                        moveUTD(screen: LoginView());
-                      })
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      CustomButton2(
+                          name: 'Verify Code',
+                          task: () {
+                            moveUTD(screen: LoginView());
+                          })
                     ],
                   ),
                 ),
@@ -146,8 +159,6 @@ class VarificationCodeView extends StatelessWidget {
     );
   }
 }
-
-
 class VarificationSection extends StatelessWidget {
   VarificationSection({Key? key, required this.height}) : super(key: key);
   double height;

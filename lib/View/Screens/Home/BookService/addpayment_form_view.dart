@@ -7,7 +7,7 @@ import 'package:haylo_app/View/Common%20Widgets/customfield_bottomBorder.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
-import 'package:haylo_app/View/Screens/Home/BookService/paymentdone_view.dart';
+import 'package:haylo_app/View/Screens/Universal/all_done_view.dart';
 import '../../../Constants/images.dart';
 
 class AddPaymentFormView extends StatelessWidget {
@@ -31,6 +31,9 @@ class AddPaymentFormView extends StatelessWidget {
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w600,
                 align: TextAlign.left),
+                SizedBox(
+              height: 5.h,
+            ),
             MainTextWidget(
                 text: 'Provide your Payment Detail',
                 fontColor: Colors.black,
@@ -84,7 +87,7 @@ class AddPaymentFormView extends StatelessWidget {
             ),
             SizedBox(height: 80.h,),
             CustomButton2(name: 'Add Card', task: () {
-              moveRTL(screen: const PaymentDoneView());
+              moveRTL(screen:  PaymentDoneView(role: 'booker',));
             }),
           ],
         ),

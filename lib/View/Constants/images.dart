@@ -1,5 +1,4 @@
 
-
 String  onboardMainImg='assets/images/Group 15116.png';
 String  loginHandImg='assets/images/hi-five-6043511-4997072.png';
 String facebookImg='assets/images/facebooklog.png';
@@ -17,6 +16,17 @@ String provideService2='assets/images/Mask Group 85.png';
 String profileImage='assets/images/Mask Group 1.png';
 String chatImage1='assets/images/User img.png';
 String chatImage2='assets/images/Photo.png';
-
-
-
+String suggestServiceIcon='assets/images/Icon awesome-gripfire.png';
+String searchMainIcon='assets/images/Group 1000000841.png';
+String serviceProviderImg='assets/images/User.png';
+String mainHomeBgImage='assets/images/Group 15120.png';
+String cleanerMainHome='assets/images/vaccum-cleaner-5108726-4267527.png';
+String electricianImg='assets/images/electrician.png';
+String providerProfilebg='assets/images/providerprofilebg.png';
+String bookingConfirmedMainImg='assets/images/Group 1000000839.png';
+String atmCardImage='assets/images/Group 1000003477.png'; 
+String atmCardImage2='assets/images/card view.png';
+String splashIm123='assets/images/mainlogo.png';
+String chatProfileImg='assets/images/User img.png';
+String chatSmileIcon='assets/images/Icon.png';
+String mapssImg='assets/images/map ss.png';

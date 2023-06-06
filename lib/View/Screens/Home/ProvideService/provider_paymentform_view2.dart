@@ -39,9 +39,11 @@ class ProviderPaymentFormView2 extends StatelessWidget {
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600,
                   align: TextAlign.left),
+
+              SizedBox(height: 8.h),
               MainTextWidget(
                   text:
-                  'This details will require to make your stripe \nconnect account',
+                      'This details will require to make your stripe \nconnect account',
                   fontColor: const Color(0xFF373737),
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
@@ -53,9 +55,11 @@ class ProviderPaymentFormView2 extends StatelessWidget {
               //_____________________PROFILE IMAGE
 
               const MainForm(),
-              CustomButton2(name: 'Next', task: () {
-                moveUTD(screen: const ProviderAddNewServiceView());
-              }),
+              CustomButton2(
+                  name: 'Next',
+                  task: () {
+                    moveUTD(screen: const ProviderAddNewServiceView());
+                  }),
               SizedBox(
                 height: 40.h,
               ),
@@ -130,8 +134,6 @@ class MainForm extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-
-
           MainTextWidget(
               text: 'Bank Account Number',
               fontColor: Colors.black,
@@ -148,10 +150,8 @@ class MainForm extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-
-
           MainTextWidget(
-              text: 'Incorporative Date',
+              text: 'Incorporation Date',
               fontColor: Colors.black,
               fontSize: 12.sp,
               fontWeight: FontWeight.w400,
@@ -163,11 +163,9 @@ class MainForm extends StatelessWidget {
               controller: controller.incorporationCtrl,
               hintText: 'DD/MM/YY',
               abscr: false),
-
           SizedBox(
             height: 20.h,
           ),
-
         ],
       ),
     );

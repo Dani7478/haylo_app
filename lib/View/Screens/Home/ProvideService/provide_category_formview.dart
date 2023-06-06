@@ -34,7 +34,7 @@ class ProvideGategoryFormView extends StatelessWidget {
 
               //______________MAIN TEXT
               MainTextWidget(
-                  text: 'Complete Your Business Profile',
+                  text: 'Complete Your Business\n Profile',
                   fontColor: Colors.black,
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600,
@@ -66,7 +66,7 @@ class ProvideGategoryFormView extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CommonBottomSings(
-                    firsttext: 'Cannot find your service',
+                    firsttext: 'Cannot find your service?',
                     lasttext: 'Click here',
                     navigate: const LoginView()),
               )

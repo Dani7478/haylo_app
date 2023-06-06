@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:haylo_app/View/Screens/Authentication/forgot_password.dart';
-import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
-import 'package:haylo_app/View/Screens/Authentication/password_entry_view.dart';
-import 'package:haylo_app/View/Screens/Authentication/varification_code_view.dart';
-import 'package:haylo_app/View/Screens/Home/ProvideService/provide_category_formview.dart';
-import 'package:haylo_app/View/Screens/Home/onboarding_view.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:haylo_app/View/Screens/Home/signup_selection.dart';
+import 'package:haylo_app/View/Screens/Home/splash_screen.dart';
 import 'Controller/bindings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'map_test.dart';
 
 void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
@@ -29,12 +28,12 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Haylo App',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.purple,
           ),
           initialRoute: '/',
           initialBinding: AllBindings(),
           routes: {
-            '/': (context) => const OnboardingView(),
+            '/': (context) =>   const SplashScreen(),
             //'/Login': (context) => const LoginView(),
           },
         );
@@ -42,3 +41,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

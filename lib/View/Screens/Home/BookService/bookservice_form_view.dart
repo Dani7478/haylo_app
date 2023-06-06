@@ -34,6 +34,8 @@ class BookServiceFormView extends StatelessWidget {
 
               //________________Sub Text
 
+             SizedBox(height: 5.h,),
+
               MainTextWidget(
                   text: 'Connect with us today!',
                   fontColor: const Color(0xFF373737),
@@ -50,6 +52,8 @@ class BookServiceFormView extends StatelessWidget {
                 backgroundColor: grayColor,
                 child: Image.asset(profileCircleImg),
               ),
+
+              SizedBox(height: 5.h,),
 
               MainTextWidget(
                   text: 'Upload Photo',
@@ -86,7 +90,7 @@ class BookServiceFormView extends StatelessWidget {
               ),
 
               //__________________________EMAIL
-              CommonText(text: 'Email'),
+              CommonText(text: 'Email Address'),
               SizedBox(
                 height: 5.h,
               ),
@@ -106,7 +110,7 @@ class BookServiceFormView extends StatelessWidget {
               CustomTextField(
                   controller: controller.firstNameCtrl,
                   hintText: 'Enter Your Password',
-                  abscr: false),
+                  abscr: true),
 
               //______________________TERMS COND
               //________________________________REMEMBER SECTION
@@ -120,7 +124,10 @@ class BookServiceFormView extends StatelessWidget {
                         children: [
                           Checkbox(
                               value: controller.isTermsOk,
-                              onChanged: (value) {}),
+                              onChanged: (value) {
+                                controller.changedIsTermsOk();
+
+                              }),
                           CommonText(text: 'I Agree to the term & onditions'),
                         ],
                       ),
@@ -134,6 +141,10 @@ class BookServiceFormView extends StatelessWidget {
                   task: () {
                     moveRTL(screen: const AddPaymentFormView());
                   }),
+
+                    SizedBox(
+                height: 8.h,
+              ),
               OrSection(
                 text: 'or sign Up with',
               ),

@@ -25,7 +25,7 @@ class MainTextWidget extends StatelessWidget {
         color: fontColor,
         fontSize: fontSize.h,
         fontWeight: fontWeight,
-        height: 1.0,
+        height: 1.2,
       ),
       textAlign: align,
     );

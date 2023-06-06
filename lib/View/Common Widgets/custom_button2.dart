@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 
@@ -18,7 +19,7 @@ class CustomButton2 extends StatelessWidget {
          task();
        },
         child: Container(
-          height: 60,
+          height: 51.h,
           width: double.infinity,
           decoration: BoxDecoration(
               color: purpleColor, borderRadius: BorderRadius.circular(26)),
@@ -26,7 +27,7 @@ class CustomButton2 extends StatelessWidget {
             child: Text(
               name,
               style:  GoogleFonts.poppins(
-                fontSize: 18,
+                fontSize: 15.sp,
                 color: Colors.white,
                 fontWeight: FontWeight.w400
               ),

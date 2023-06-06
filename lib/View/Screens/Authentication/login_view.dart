@@ -39,7 +39,7 @@ class LoginView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Hi, Welcome Back',
+                    'Hi, Welcome Back !',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: screenWidth * 0.07,
@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
               CustomTextField(
                   controller: Get.find<LoginController>().emailCtrl,
                   hintText: 'Enter Password',
-                  abscr: false),
+                  abscr: true),
 
               SizedBox(
                 height: 10.h,
@@ -109,7 +109,7 @@ class LoginView extends StatelessWidget {
                           moveRTL(screen: const ForgotPasswordView());
                         },
                         child: Text(
-                          'Forgot Password',
+                          'Forgot Password?',
                           style: GoogleFonts.poppins(
                               fontSize: 12,
                               color: const Color(0xFFD40000),
@@ -128,13 +128,16 @@ class LoginView extends StatelessWidget {
                 moveUTD(screen: const BookerHomeView());
               }),
                SizedBox(
-                height:5.h,
+                height:40.h,
               ),
                OrSection(text: 'or login with',),
                SizedBox(
                 height:8.h,
               ),
               const SocialSection(),
+               SizedBox(
+                height:100.h,
+              ),
              
                Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -145,7 +148,7 @@ class LoginView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                        const  Text(
-                          'Dont Have an Account',
+                          "Don't Have an Account?",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,

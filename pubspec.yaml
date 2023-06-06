@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  dotted_border: ^2.0.0+3
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.3.0
@@ -37,16 +38,15 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^4.0.5
   icons_launcher: ^2.1.0
-  dotted_border: ^2.0.0+3
+  flutter_chat_bubble: ^2.0.2
+  google_maps_flutter: any
+  permission_handler: any
 
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-
-
-  #________________________SPLASH SCREEN
 flutter_native_splash:
   color: "#FFFFFF"
   image: assets/images/splash2.png
