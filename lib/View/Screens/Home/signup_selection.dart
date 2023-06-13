@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:haylo_app/View/Common Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import 'package:haylo_app/View/Screens/Home/BookService/bookservice_form_view.dart';
 import 'package:haylo_app/View/Screens/Home/ProvideService/provideservice_form_view.dart';
 
@@ -167,7 +168,7 @@ class SignupSelectionView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:  [
                           const Text(
-                            'Dont Have an Account',
+                            'Already have an account?',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -176,11 +177,11 @@ class SignupSelectionView extends StatelessWidget {
                           TextButton(
                               onPressed: () {
                                 moveLTR(
-                                  screen:const SignupSelectionView()
+                                  screen:const LoginView()
                                 );
                               },
                               child: const Text(
-                                'Sign Up',
+                                'Sign In',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,

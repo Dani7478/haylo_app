@@ -14,7 +14,7 @@ class ProviderPaymentFormView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(ProviderCategoryFormController());
+    var controller = Get.put(ProviderPaymentFormController());
     return Scaffold(
       body: SizedBox(
         height: context.height,
@@ -39,7 +39,7 @@ class ProviderPaymentFormView extends StatelessWidget {
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600,
                   align: TextAlign.left),
-                    SizedBox(
+              SizedBox(
                 height: 8.h,
               ),
               MainTextWidget(
@@ -56,9 +56,11 @@ class ProviderPaymentFormView extends StatelessWidget {
               //_____________________PROFILE IMAGE
 
               const MainForm(),
-              CustomButton2(name: 'Next', task: () {
-                moveUTD(screen: const ProviderPaymentFormView2());
-              }),
+              CustomButton2(
+                  name: 'Next',
+                  task: () {
+                  controller.goNext();
+                  }),
               SizedBox(
                 height: 40.h,
               ),
@@ -76,7 +78,8 @@ class MainForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProviderPaymentFormController());
-    return Padding(
+    return GetBuilder<ProviderPaymentFormController>(builder: (controller){
+      return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
@@ -111,8 +114,10 @@ class MainForm extends StatelessWidget {
             height: 5.h,
           ),
           CustomDropdownWidget(
-              itemList: controller.genderList,
-              selectedItem: controller.selectedGender),
+            itemList: controller.genderList,
+            selectedItem: controller.selectedGender,
+            type: 'gender',
+          ),
           SizedBox(
             height: 12.h,
           ),
@@ -126,13 +131,13 @@ class MainForm extends StatelessWidget {
             height: 5.h,
           ),
           CustomDropdownWidget(
-              itemList: controller.nationalityList,
-              selectedItem: controller.selectedNationality),
+            itemList: controller.nationalityList,
+            selectedItem: controller.selectedNationality,
+            type: 'nationality',
+          ),
           SizedBox(
             height: 12.h,
           ),
-
-
           MainTextWidget(
               text: 'State',
               fontColor: Colors.black,
@@ -149,8 +154,6 @@ class MainForm extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-
-
           MainTextWidget(
               text: 'City',
               fontColor: Colors.black,
@@ -161,13 +164,12 @@ class MainForm extends StatelessWidget {
             height: 5.h,
           ),
           CustomTextField(
-              controller: controller.stateCtrl,
+              controller: controller.cityCtrl,
               hintText: 'Type Here',
               abscr: false),
           SizedBox(
             height: 12.h,
           ),
-
           MainTextWidget(
               text: 'Address',
               fontColor: Colors.black,
@@ -178,13 +180,12 @@ class MainForm extends StatelessWidget {
             height: 5.h,
           ),
           CustomTextField(
-              controller: controller.stateCtrl,
+              controller: controller.addressCtrl,
               hintText: 'Type Here',
               abscr: false),
           SizedBox(
             height: 12.h,
           ),
-
           MainTextWidget(
               text: 'Postal code',
               fontColor: Colors.black,
@@ -195,13 +196,12 @@ class MainForm extends StatelessWidget {
             height: 5.h,
           ),
           CustomTextField(
-              controller: controller.stateCtrl,
+              controller: controller.postalCtrl,
               hintText: 'Type Here',
               abscr: false),
           SizedBox(
             height: 12.h,
           ),
-
           MainTextWidget(
               text: 'National Id /SSN',
               fontColor: Colors.black,
@@ -212,15 +212,86 @@ class MainForm extends StatelessWidget {
             height: 5.h,
           ),
           CustomTextField(
-              controller: controller.stateCtrl,
+              controller: controller.nationalIdCtrl,
               hintText: 'Type Here',
               abscr: false),
           SizedBox(
             height: 20.h,
           ),
-
         ],
       ),
+    );
+    });
+  }
+}
+
+class CustomDropdownWidget extends StatelessWidget {
+  List<String> itemList;
+  String selectedItem;
+  String type;
+
+  CustomDropdownWidget(
+      {required this.itemList, required this.selectedItem, required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<ProviderPaymentFormController>(
+      builder: (controler) {
+        return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: grayColor,
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(right: 10.w),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                    child: DropdownButton<String>(
+                      underline: const SizedBox(),
+                      value: selectedItem,
+                      onChanged: (String? newValue) {
+                        if (type == 'gender') {
+                          controler.changeGender(gneder: newValue.toString());
+                        } else {
+                           controler.changeNationality(nationality: newValue.toString());
+                        }
+                      },
+                      items: itemList.map<DropdownMenuItem<String>>(
+                        (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: GoogleFonts.poppins(
+                                fontSize: 13.sp,
+                                color: Color(0xFF747474),
+                              ),
+                            ),
+                          );
+                        },
+                      ).toList(),
+                      icon: SizedBox.shrink(),
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  color: blackTextColor,
+                  size: 25.sp,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

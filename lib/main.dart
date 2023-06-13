@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/Controller/api.dart';
 import 'package:haylo_app/View/Screens/Home/splash_screen.dart';
 import 'Controller/bindings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'map_test.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           initialBinding: AllBindings(),
           routes: {
-            '/': (context) =>   const SplashScreen(),
+            '/': (context) => const SplashScreen(),
             //'/Login': (context) => const LoginView(),
           },
         );
@@ -41,4 +42,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

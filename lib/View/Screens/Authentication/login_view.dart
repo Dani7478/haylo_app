@@ -23,14 +23,15 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    var controller = Get.put(LoginController());
 
     return Scaffold(
       body: SizedBox(
         height: screenHeight,
         width: screenWidth,
         child: Padding(
-          padding: EdgeInsets.only(
-              left: 25.h, right: 25.h, bottom: 25.h, top: 50.h),
+          padding:
+              EdgeInsets.only(left: 25.h, right: 25.h, bottom: 25.h, top: 50.h),
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,8 +81,9 @@ class LoginView extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
+
               CustomTextField(
-                  controller: Get.find<LoginController>().emailCtrl,
+                  controller: Get.find<LoginController>().passwrdCtrl,
                   hintText: 'Enter Password',
                   abscr: true),
 
@@ -100,7 +102,10 @@ class LoginView extends StatelessWidget {
                         children: [
                           Checkbox(
                               value: controller.isremember,
-                              onChanged: (value) {}),
+                              onChanged: (value) {
+                                controller.changeIsRemember();
+                                
+                              }),
                           CommonText(text: 'Remember Me'),
                         ],
                       ),
@@ -122,55 +127,61 @@ class LoginView extends StatelessWidget {
               ),
 
               SizedBox(
-                height:20.h,
+                height: 20.h,
               ),
-              CustomButton2(name: 'Login', task: () {
-                moveUTD(screen: const BookerHomeView());
-              }),
-               SizedBox(
-                height:40.h,
+              CustomButton2(
+                  name: 'Login',
+                  task: () {
+                    controller.login();
+                  }),
+              SizedBox(
+                height: 40.h,
               ),
-               OrSection(text: 'or login with',),
-               SizedBox(
-                height:8.h,
+              OrSection(
+                text: 'or login with',
+              ),
+              SizedBox(
+                height: 8.h,
               ),
               const SocialSection(),
-               SizedBox(
-                height:100.h,
+              SizedBox(
+                height: 100.h,
               ),
-             
-               Column(
+
+              Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                 children: [
-                   SizedBox(
+                children: [
+                  SizedBox(
                     width: double.infinity,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                       const  Text(
+                        const Text(
                           "Don't Have an Account?",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w200),
                         ),
-                       const  SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
-                       TextButton(onPressed: (){
-                        moveLTR(screen: const SignupSelectionView());
-                       }, child:   const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ))
+                        TextButton(
+                            onPressed: () {
+                              moveLTR(screen: const SignupSelectionView());
+                            },
+                            child: const Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ))
                       ],
                     ),
+                  ),
+                ],
               ),
-                 ],
-               ),
             ],
           ),
         ),
@@ -178,7 +189,6 @@ class LoginView extends StatelessWidget {
     );
   }
 }
-
 
 //_______________________________SOCIAL SECTION
 class SocialSection extends StatelessWidget {

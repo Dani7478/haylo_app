@@ -41,6 +41,10 @@ dependencies:
   flutter_chat_bubble: ^2.0.2
   google_maps_flutter: any
   permission_handler: any
+  http: ^1.0.0
+  mime: ^1.0.4
+  fluttertoast: ^8.2.2
+  shared_preferences: ^2.1.2
 
 
 dev_dependencies:

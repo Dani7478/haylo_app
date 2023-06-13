@@ -48,6 +48,7 @@ class ProviderPaymentFormView2 extends StatelessWidget {
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   align: TextAlign.left),
+
               SizedBox(
                 height: 30.h,
               ),
@@ -58,7 +59,7 @@ class ProviderPaymentFormView2 extends StatelessWidget {
               CustomButton2(
                   name: 'Next',
                   task: () {
-                    moveUTD(screen: const ProviderAddNewServiceView());
+                   controller.goNext();
                   }),
               SizedBox(
                 height: 40.h,
@@ -95,10 +96,12 @@ class MainForm extends StatelessWidget {
           SizedBox(
             height: 5.h,
           ),
+
           CustomTextField(
-              controller: controller.bankNameCtrl,
+              controller: controller.holderNameCtrl,
               hintText: 'Type here',
               abscr: false),
+              
           SizedBox(
             height: 12.h,
           ),

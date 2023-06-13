@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
 import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
-
 import '../../Constants/images.dart';
 import 'onboarding_view.dart';
 

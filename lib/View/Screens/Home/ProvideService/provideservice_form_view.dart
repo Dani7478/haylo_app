@@ -20,7 +20,8 @@ class ProvideServiceFormView extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding: EdgeInsets.only(top: 50.h, left: 25.h, right: 25.h),
-          child: ListView(
+          child: GetBuilder<ProvideProfileFormController>(builder: (controller){
+           return ListView(
             // physics: const NeverScrollableScrollPhysics(),
             children: [
               //___________________MAIN TEXT
@@ -32,7 +33,7 @@ class ProvideServiceFormView extends StatelessWidget {
                   align: TextAlign.start),
 
               //________________Sub Text
-               SizedBox(
+              SizedBox(
                 height: 5.h,
               ),
 
@@ -47,12 +48,19 @@ class ProvideServiceFormView extends StatelessWidget {
                 height: 30.h,
               ),
               //_______________Profile Image
-              CircleAvatar(
-                radius: 50.h,
-                backgroundColor: grayColor,
-                child: Image.asset(profileCircleImg),
-              ),
-               SizedBox(
+              GetBuilder<ProvideProfileFormController>(builder: (controller) {
+                return GestureDetector(
+                  onTap: () {
+                    // controller.selectImageFromGal();
+                  },
+                  child: CircleAvatar(
+                    radius: 50.h,
+                    backgroundColor: grayColor,
+                    child: Image.asset(profileCircleImg),
+                  ),
+                );
+              }),
+              SizedBox(
                 height: 5.h,
               ),
 
@@ -83,7 +91,7 @@ class ProvideServiceFormView extends StatelessWidget {
                 height: 5.h,
               ),
               CustomTextField(
-                  controller: controller.firstNameCtrl,
+                  controller: controller.lastNameCtrl,
                   hintText: 'Enter Last Name',
                   abscr: false),
               SizedBox(
@@ -96,7 +104,7 @@ class ProvideServiceFormView extends StatelessWidget {
                 height: 5.h,
               ),
               CustomTextField(
-                  controller: controller.firstNameCtrl,
+                  controller: controller.emailCtrl,
                   hintText: 'Enter Your Email',
                   abscr: false),
               SizedBox(
@@ -108,15 +116,17 @@ class ProvideServiceFormView extends StatelessWidget {
               SizedBox(
                 height: 5.h,
               ),
-              CustomTextField(
-                  controller: controller.firstNameCtrl,
-                  hintText: 'Enter Your Password',
-                  abscr: true),
+              GetBuilder<ProvideProfileFormController>(builder: (controller) {
+                return CustomTextField(
+                    controller: controller.passwordCtrl,
+                    hintText: 'Enter Your Password',
+                    abscr: true);
+              }),
 
               //______________________TERMS COND
               //________________________________REMEMBER SECTION
-              GetBuilder<BookProfileFormController>(
-                init: BookProfileFormController(),
+              GetBuilder<ProvideProfileFormController>(
+                init: ProvideProfileFormController(),
                 builder: (controller) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,7 +135,9 @@ class ProvideServiceFormView extends StatelessWidget {
                         children: [
                           Checkbox(
                               value: controller.isTermsOk,
-                              onChanged: (value) {}),
+                              onChanged: (value) {
+                                controller.changeIsTerm();
+                              }),
                           CommonText(text: 'I Agree to the term & onditions'),
                         ],
                       ),
@@ -134,12 +146,14 @@ class ProvideServiceFormView extends StatelessWidget {
                 },
               ),
 
-              CustomButton2(
+             controller.isLoading==false? CustomButton2(
                   name: 'Sign Up',
                   task: () {
-                    moveRTL(screen:  const ProvideGategoryFormView());
-                  }),
-                   SizedBox(
+                    controller.submitProvider();
+                   
+                  }): const CustomLoadingButton(),
+              
+              SizedBox(
                 height: 8.h,
               ),
               OrSection(
@@ -151,7 +165,8 @@ class ProvideServiceFormView extends StatelessWidget {
                   lasttext: 'SignIn',
                   navigate: const LoginView()),
             ],
-          ),
+          );
+          })
         ),
       ),
     );

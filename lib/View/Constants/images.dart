@@ -30,3 +30,5 @@ String splashIm123='assets/images/mainlogo.png';
 String chatProfileImg='assets/images/User img.png';
 String chatSmileIcon='assets/images/Icon.png';
 String mapssImg='assets/images/map ss.png';
+String starImg='assets/images/star.png';
+String unfilStarImg='assets/images/star unfill.png';

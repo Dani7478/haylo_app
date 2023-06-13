@@ -27,7 +27,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: TextField(
-        controller: TextEditingController(),
+        controller: controller,
         onSubmitted: (value) {
           FocusScope.of(context).nextFocus();
         },
