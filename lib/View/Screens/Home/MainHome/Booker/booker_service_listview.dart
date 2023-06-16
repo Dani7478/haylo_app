@@ -3,11 +3,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerside_providerprofileview.dart';
+import '../../../../../Controller/Home/MainHome/Booker/bookerservice_controller.dart';
 import '../../../../Common Widgets/widgets_links.dart';
 
-class BookerServiceListView extends StatelessWidget {
-  const BookerServiceListView({super.key});
+class BookerServiceListView extends StatefulWidget {
+  BookerServiceListView({super.key, required this.id});
 
+  int id;
+
+  @override
+  State<BookerServiceListView> createState() => _BookerServiceListViewState();
+}
+
+class _BookerServiceListViewState extends State<BookerServiceListView> {
+var controller =Get.put(BookerServiceListController());
+  @override
+  void initState() {
+   controller.getCategorizeUsers(widget.id);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,14 +78,15 @@ class BookerServiceListView extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   itemCount: 20,
                   itemBuilder: (context, index) {
-                    return  GestureDetector(
-                      onTap: (){
+                    return GestureDetector(
+                      onTap: () {
                         moveUTD(screen: const BookerSideProviderProfileView());
                       },
                       child: ServiceProviderCard(
                         image: serviceProviderImg,
                         star: 4.5,
-                        description: 'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
+                        description:
+                            'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
                         name: 'John Smith',
                         rate: 30,
                       ),

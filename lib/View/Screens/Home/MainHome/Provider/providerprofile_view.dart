@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/Controller/toast.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
 import 'package:haylo_app/View/Common%20Widgets/message_dialogue.dart';
 import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
+import 'package:haylo_app/View/Screens/Home/ProvideService/provider_edit_services.dart';
 import 'package:haylo_app/View/Screens/Universal/notification_listview.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_payment_updateview.dart';
-
+import '../../../../../Controller/controller_links.dart';
 import '../../../../Common Widgets/widgets_links.dart';
+import '../../../../Constants/consts.dart';
 import '../../../../Constants/images.dart';
-import '../../../../Constants/regix.dart';
 
-class BookerProfileView extends StatelessWidget {
-  const BookerProfileView({Key? key}) : super(key: key);
+class ProviderProfileView extends StatelessWidget {
+  const ProviderProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller=Get.put(ProviderProfileController());
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: ListView(
+      child: GetBuilder<ProviderProfileController>(builder: (controller){
+      return  ListView(
         children: [
           Container(
             height: context.height * 0.30.h,
@@ -35,7 +39,7 @@ class BookerProfileView extends StatelessWidget {
                   height: 10.h,
                 ),
                 MainTextWidget(
-                    text: 'Joseph Ghotra',
+                    text: controller.userName!,
                     fontColor: Colors.black,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w400,
@@ -50,23 +54,22 @@ class BookerProfileView extends StatelessWidget {
               child: ListView(
                 children: [
                   profileItemCard(
-                      icon: Icons.person, name: 'Edit Profile', task: () {}),
-                  profileItemCard(
-                      icon: Icons.notification_important_outlined,
-                      name: 'Notifications',
-                      task: () {
-                        moveUTD(
-                            screen: NotificationListView(
-                          role: 'booker',
-                        ));
+                      icon: Icons.person, name: 'Edit Profile', task: () {
+
                       }),
                   profileItemCard(
-                      icon: Icons.note_alt_outlined,
-                      name: 'My Booking',
+                      icon: Icons.settings_suggest_rounded,
+                      name: 'Edit Service',
+                      task: () {
+                        moveUTD(screen: const ProviderEditServicesView());
+                      }),
+                  profileItemCard(
+                      icon: Icons.attach_money_outlined,
+                      name: 'Transaction History',
                       task: () {}),
                   profileItemCard(
                       icon: Icons.payment_rounded,
-                      name: 'Payment Method',
+                      name: 'Update Payment Detail',
                       task: () {
                         moveUTD(screen: const BookerPaymentUpdateView());
                       }),
@@ -88,14 +91,16 @@ class BookerProfileView extends StatelessWidget {
                       icon: Icons.logout,
                       name: 'Sign Out',
                       task: () {
-                        moveUTD(screen: const LoginView());
+                        controller.logoutUser();
+                      
                       }),
                 ],
               ),
             ),
           ),
         ],
-      ),
+      );
+      }),
     );
   }
 
@@ -171,11 +176,10 @@ class BookerProfileView extends StatelessWidget {
                 controller: TextEditingController(),
                 hintText: 'Type here',
                 abscr: false,
-              
                   error: 'field must be filled',
                   pattern: nameRegix,
-                  
-                ),
+                  ),
+                
             SizedBox(
               height: 15.h,
             ),
@@ -192,10 +196,9 @@ class BookerProfileView extends StatelessWidget {
                 controller: TextEditingController(),
                 hintText: 'Type here',
                 abscr: false,
-                  error: 'field must be filled',
-                  pattern: nameRegix,
-                  
-                ),
+                  error: 'enter valid email',
+                  pattern: emailRegix,
+                  ),
             SizedBox(
               height: 15.h,
             ),

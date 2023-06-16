@@ -51,7 +51,7 @@ class CustomFieldWithBottomBorder extends StatelessWidget {
                     color: const Color(0xFF1D2226),
                     fontWeight: FontWeight.w400),
                 //contentPadding: EdgeInsets.zero,
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                 border: InputBorder.none,
                 suffixIcon: Icon(endicon,size: 25.h,),
 

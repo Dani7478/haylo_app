@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:haylo_app/Model/user_service.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerlocation_selectorview.dart';
@@ -35,10 +36,7 @@ class BookerServiceSelector extends StatelessWidget {
             ),
             ServiceRateCard(
               role: 'user',
-              image: serviceProviderImg,
-              serviceName: 'Service Name',
-              description: 'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
-              serviceRate: 30,
+             service: new UserService(),
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),

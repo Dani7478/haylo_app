@@ -39,7 +39,7 @@ class BookerPaymentUpdateView extends StatelessWidget {
           Padding(
             padding:  EdgeInsets.symmetric(vertical: 25.h, horizontal: 15.w),
             child: CustomButtonWithBorder(name: 'Update Payment Method', task: (){
-              moveUTD(screen: const AddPaymentFormView());
+              moveUTD(screen: const BookerAddPaymentFormView());
             }),
           )
         ],

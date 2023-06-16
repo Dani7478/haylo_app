@@ -79,11 +79,11 @@ class BookerSearchView extends StatelessWidget {
   suggetionCard(String service) {
     return GestureDetector(
       onTap: (){
-        Get.to(
-          const BookerServiceListView(),
-          transition: Transition.upToDown,
-          duration: const Duration(milliseconds:400 ),
-        );
+        // Get.to(
+        //   const BookerServiceListView(),
+        //   transition: Transition.upToDown,
+        //   duration: const Duration(milliseconds:400 ),
+        // );
       },
       child: Container(
         margin: EdgeInsets.all(5.h),

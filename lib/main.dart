@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:haylo_app/Controller/api.dart';
-import 'package:haylo_app/View/Screens/Home/splash_screen.dart';
+import 'package:haylo_app/View/Screens/Home/ProvideService/provider_edit_services.dart';
+import 'Controller/Home/ProvideService/provideraddnewservice_controller.dart';
 import 'Controller/bindings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
+
+import 'View/Screens/Authentication/login_view.dart';
+import 'View/Screens/Home/ProvideService/provider_addnewservice_view.dart';
+import 'View/Screens/Home/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           initialBinding: AllBindings(),
           routes: {
-            '/': (context) => const SplashScreen(),
+            '/': (context) =>  const SplashScreen()
             //'/Login': (context) => const LoginView(),
           },
         );

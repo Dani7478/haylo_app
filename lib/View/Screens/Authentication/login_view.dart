@@ -72,10 +72,15 @@ class LoginView extends StatelessWidget {
               CustomTextField(
                   controller: Get.find<LoginController>().emailCtrl,
                   hintText: 'Enter Your, Email',
-                  abscr: false),
+                  abscr: false,
+                  error: 'Enter Valid Email',
+                  pattern: emailRegix,
+                  ),
+                  
               SizedBox(
                 height: 10.h,
               ),
+
               //____________________________PASSWORD  SECTION
               CommonText(text: 'Password'),
               SizedBox(
@@ -85,7 +90,10 @@ class LoginView extends StatelessWidget {
               CustomTextField(
                   controller: Get.find<LoginController>().passwrdCtrl,
                   hintText: 'Enter Password',
-                  abscr: true),
+                  abscr: true,
+                  error: 'Enter Strong Password',
+                  pattern: passwordRegix,
+                  ),
 
               SizedBox(
                 height: 10.h,
@@ -129,11 +137,16 @@ class LoginView extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              CustomButton2(
-                  name: 'Login',
-                  task: () {
-                    controller.login();
-                  }),
+              GetBuilder<LoginController>(
+                builder: (controller) {
+                  return controller.isloading==false? CustomButton2(
+                      name: 'Login',
+                      task: () {
+                        controller.login();
+                      }):
+                      const CustomLoadingButton();
+                }
+              ),
               SizedBox(
                 height: 40.h,
               ),

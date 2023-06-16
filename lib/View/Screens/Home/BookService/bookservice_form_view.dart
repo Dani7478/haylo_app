@@ -4,6 +4,7 @@ import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 
 import '../../../Constants/images.dart';
@@ -34,7 +35,9 @@ class BookServiceFormView extends StatelessWidget {
 
               //________________Sub Text
 
-             SizedBox(height: 5.h,),
+              SizedBox(
+                height: 5.h,
+              ),
 
               MainTextWidget(
                   text: 'Connect with us today!',
@@ -53,7 +56,9 @@ class BookServiceFormView extends StatelessWidget {
                 child: Image.asset(profileCircleImg),
               ),
 
-              SizedBox(height: 5.h,),
+              SizedBox(
+                height: 5.h,
+              ),
 
               MainTextWidget(
                   text: 'Upload Photo',
@@ -68,9 +73,12 @@ class BookServiceFormView extends StatelessWidget {
                 height: 5.h,
               ),
               CustomTextField(
-                  controller: controller.firstNameCtrl,
-                  hintText: 'Enter Your First Name',
-                  abscr: false),
+                controller: controller.firstNameCtrl,
+                hintText: 'Enter Your First Name',
+                abscr: false,
+                error: 'Enter Something',
+                pattern: nameRegix,
+              ),
 
               SizedBox(
                 height: 10.h,
@@ -82,9 +90,12 @@ class BookServiceFormView extends StatelessWidget {
                 height: 5.h,
               ),
               CustomTextField(
-                  controller: controller.firstNameCtrl,
-                  hintText: 'Enter Last Name',
-                  abscr: false),
+                controller: controller.lastNameCtrl,
+                hintText: 'Enter Last Name',
+                abscr: false,
+                error: 'Enter Something',
+                pattern: nameRegix,
+              ),
               SizedBox(
                 height: 10.h,
               ),
@@ -95,9 +106,12 @@ class BookServiceFormView extends StatelessWidget {
                 height: 5.h,
               ),
               CustomTextField(
-                  controller: controller.firstNameCtrl,
-                  hintText: 'Enter Your Email',
-                  abscr: false),
+                  controller: controller.emailCtrl,
+                hintText: 'Enter Your Email',
+                abscr: false,
+                error: 'enter valid email',
+                pattern: emailRegix,
+              ),
               SizedBox(
                 height: 10.h,
               ),
@@ -108,9 +122,12 @@ class BookServiceFormView extends StatelessWidget {
                 height: 5.h,
               ),
               CustomTextField(
-                  controller: controller.firstNameCtrl,
-                  hintText: 'Enter Your Password',
-                  abscr: true),
+                controller: controller.passwordCtrl,
+                hintText: 'Enter Your Password',
+                abscr: true,
+                error: 'Enter Valid Password',
+                pattern: passwordRegix,
+              ),
 
               //______________________TERMS COND
               //________________________________REMEMBER SECTION
@@ -126,7 +143,6 @@ class BookServiceFormView extends StatelessWidget {
                               value: controller.isTermsOk,
                               onChanged: (value) {
                                 controller.changedIsTermsOk();
-
                               }),
                           CommonText(text: 'I Agree to the term & onditions'),
                         ],
@@ -136,13 +152,14 @@ class BookServiceFormView extends StatelessWidget {
                 },
               ),
 
-              CustomButton2(
-                  name: 'Sign Up',
-                  task: () {
-                    moveRTL(screen: const AddPaymentFormView());
-                  }),
+              GetBuilder<BookProfileFormController>(builder: (controller) {
+                return controller.isLoading==false ? CustomButton2(name: 'Sign Up', task: () {
+                  controller.submitBooker();
+                }):
+                    const CustomLoadingButton();
+              }),
 
-                    SizedBox(
+              SizedBox(
                 height: 8.h,
               ),
               OrSection(

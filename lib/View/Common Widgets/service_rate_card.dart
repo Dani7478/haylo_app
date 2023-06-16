@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
+import 'package:haylo_app/Controller/Home/ProvideService/provideraddnewservice_controller.dart';
+import 'package:haylo_app/Model/user_service.dart';
 import '../Constants/colors.dart';
 import '../Constants/images.dart';
 import 'widgets_links.dart';
 
 class ServiceRateCard extends StatelessWidget {
-  ServiceRateCard(
-      {super.key,
-      required this.role,
-      required this.image,
-      required this.serviceName,
-      required this.description,
-      required this.serviceRate});
+  ServiceRateCard({
+    super.key,
+    required this.role,
+    required this.service,
+  });
   String role;
-  String image;
-  String serviceName;
-  String description;
-  int serviceRate;
+  UserService service;
 
   @override
   Widget build(BuildContext context) {
+    var controller =Get.put(ProviderAddNewServiceController());
     return Container(
       width: double.infinity,
       //  padding: EdgeInsets.only(left: 5.w, right: 5.w),
-      padding: EdgeInsets.symmetric(vertical: 12.h),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Center(
         child: ListTile(
           leading: SizedBox(
@@ -33,7 +31,7 @@ class ServiceRateCard extends StatelessWidget {
             child: Image.asset(provideService1),
           ),
           title: MainTextWidget(
-            text: 'Service Name',
+            text: service.name!,
             fontSize: 12.sp,
             fontColor: Colors.black,
             fontWeight: FontWeight.w500,
@@ -43,7 +41,7 @@ class ServiceRateCard extends StatelessWidget {
             margin: EdgeInsets.only(top: 3.h),
             // width: 200.w,
             child: MainTextWidget(
-              text: 'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
+              text:service.description!,
               fontSize: 8.sp,
               fontColor: Colors.black,
               fontWeight: FontWeight.w300,
@@ -67,7 +65,7 @@ class ServiceRateCard extends StatelessWidget {
                     ),
                     child: Center(
                       child: MainTextWidget(
-                        text: '\$ 30 /HR',
+                        text: '${service.priceCurrency} ${service.perHourPrice} /HR',
                         fontSize: 10.sp,
                         fontColor: Colors.black,
                         fontWeight: FontWeight.w600,
@@ -78,10 +76,15 @@ class ServiceRateCard extends StatelessWidget {
                   width: 5.w,
                 ),
                 role == 'admin'
-                    ? const Icon(
-                        Icons.delete,
-                        color: purpleColor,
-                      )
+                    ? GestureDetector(
+                  onTap: (){
+                    controller.deleteService(service);
+                  },
+                      child: const Icon(
+                          Icons.delete,
+                          color: purpleColor,
+                        ),
+                    )
                     : const SizedBox()
               ],
             ),

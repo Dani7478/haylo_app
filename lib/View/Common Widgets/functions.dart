@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../Constants/colors.dart';
+import '../Constants/consts.dart';
 import 'widgets_links.dart';
 
 class CustomFunctions {
@@ -32,7 +33,12 @@ class CustomFunctions {
               CustomTextField(
                   controller: TextEditingController(),
                   hintText: 'Type Here',
-                  abscr: false),
+                  abscr: false,
+                  
+                  error: 'field must be filled',
+                  pattern: nameRegix,
+                  ),
+                  
               SizedBox(height: 25.h),
               CustomButton2(name: 'Send', task: () {}),
               SizedBox(height: 15.h),

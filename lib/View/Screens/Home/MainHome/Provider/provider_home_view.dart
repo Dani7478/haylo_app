@@ -5,6 +5,7 @@ import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Provider/provider_main_homeview.dart';
+import 'package:haylo_app/View/Screens/Home/MainHome/Provider/providerprofile_view.dart';
 import 'package:haylo_app/View/Screens/Universal/chat_list_view.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_serachview.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerprofile_view.dart';
@@ -19,13 +20,15 @@ class ProviderHomeView extends StatelessWidget {
     return Scaffold(
       body: GetBuilder<ProviderAppBarController>(builder: (controller) {
         if (controller.activeView == 'profile') {
-          return const BookerProfileView();
+          return const ProviderProfileView();
         } else if (controller.activeView == 'chat') {
           return ChatListView(
             role: 'provider',
           );
         } else if (controller.activeView == 'notification') {
-          return  NotificationListView(role: 'provider',);
+          return NotificationListView(
+            role: 'provider',
+          );
         } else {
           return const ProviderMainHomeView();
         }

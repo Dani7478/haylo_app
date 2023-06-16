@@ -3,12 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 
 class VerificationCodeInput extends StatefulWidget {
+  List<TextEditingController> controllers;
+  VerificationCodeInput({required this.controllers});
+
   @override
   _VerificationCodeInputState createState() => _VerificationCodeInputState();
+
+
 }
 
 class _VerificationCodeInputState extends State<VerificationCodeInput> {
-  final List<TextEditingController> controllers = [];
+  // final List<TextEditingController> controllers = [];
   final List<FocusNode> focusNodes = [];
   final int codeLength = 5;
 
@@ -18,7 +23,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
     for (int i = 0; i < codeLength; i++) {
       TextEditingController controller = TextEditingController();
       FocusNode focusNode = FocusNode();
-      controllers.add(controller);
+    widget.controllers.add(controller);
       focusNodes.add(focusNode);
 
       if (i < codeLength - 1) {
@@ -34,7 +39,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
   @override
   void dispose() {
     for (int i = 0; i < codeLength; i++) {
-      controllers[i].dispose();
+      widget.controllers[i].dispose();
       focusNodes[i].dispose();
     }
     super.dispose();
@@ -56,7 +61,7 @@ class _VerificationCodeInputState extends State<VerificationCodeInput> {
               border: Border.all(color: Colors.grey),
             ),
             child: TextFormField(
-              controller: controllers[index],
+              controller: widget.controllers[index],
               focusNode: focusNodes[index],
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,

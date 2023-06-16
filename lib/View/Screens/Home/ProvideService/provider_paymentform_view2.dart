@@ -7,6 +7,7 @@ import 'package:haylo_app/View/Screens/Home/ProvideService/provider_addnewservic
 
 import '../../../Common Widgets/widgets_links.dart';
 import '../../../Constants/colors.dart';
+import '../../../Constants/regix.dart';
 import '../../Authentication/login_view.dart';
 
 class ProviderPaymentFormView2 extends StatelessWidget {
@@ -100,7 +101,10 @@ class MainForm extends StatelessWidget {
           CustomTextField(
               controller: controller.holderNameCtrl,
               hintText: 'Type here',
-              abscr: false),
+              abscr: false,
+               error: 'Enter Something',
+                  pattern: nameRegix,
+              ),
               
           SizedBox(
             height: 12.h,
@@ -117,7 +121,10 @@ class MainForm extends StatelessWidget {
           CustomTextField(
               controller: controller.routingNumberCtrl,
               hintText: 'Type Here',
-              abscr: false),
+              abscr: false,
+               error: 'Enter Something',
+                  pattern: nameRegix,
+              ),
           SizedBox(
             height: 12.h,
           ),
@@ -133,7 +140,10 @@ class MainForm extends StatelessWidget {
           CustomTextField(
               controller: controller.bankNameCtrl,
               hintText: 'Type Here',
-              abscr: false),
+              abscr: false,
+               error: 'Enter Something',
+                  pattern: nameRegix,
+              ),
           SizedBox(
             height: 12.h,
           ),
@@ -149,7 +159,10 @@ class MainForm extends StatelessWidget {
           CustomTextField(
               controller: controller.bankAccountNumberCtrl,
               hintText: 'Type Here',
-              abscr: false),
+              abscr: false,
+               error: 'Enter Valid Bank Account',
+                  pattern: cardNoRegix,
+              ),
           SizedBox(
             height: 12.h,
           ),
@@ -165,7 +178,10 @@ class MainForm extends StatelessWidget {
           CustomTextField(
               controller: controller.incorporationCtrl,
               hintText: 'DD/MM/YY',
-              abscr: false),
+              abscr: false,
+               error: 'Enter Something',
+                  pattern: dateRegix,
+              ),
           SizedBox(
             height: 20.h,
           ),

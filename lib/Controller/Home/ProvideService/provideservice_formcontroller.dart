@@ -56,7 +56,7 @@ class ProvideProfileFormController extends GetxController {
     isLoading = true;
     update();
     Map<String, dynamic> providerData = {
-      'signup_as': '1', // 1 means signup as a provider
+      'signup_as': '2', // 1 means signup as a provider
       'first_name': firstNameCtrl.text,
       'last_name': lastNameCtrl.text,
       'email': emailCtrl.text,

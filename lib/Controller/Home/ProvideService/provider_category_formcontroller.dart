@@ -17,17 +17,15 @@ class ProviderCategoryFormController extends GetxController {
   List<String> serviceList = ['Select'];
   List<String> serviceImage = [];
   String? selectedItem = 'Select';
-  
 
   changeSelectedItem(value) {
     selectedItem = value;
     customToast(selectedItem!);
     update();
   }
-
   getServiceList() async {
     customToast('Getting Service List');
-    var response = await ApiService().getApiDatawithToken(url: getCategories);
+    var response = await ApiService().getApiDatawithToken(url: serviceCatUrl);
     var jsonData = json.decode(response);
     if (jsonData['status'] == true) {
       for (var data in jsonData['data']) {
@@ -39,7 +37,6 @@ class ProviderCategoryFormController extends GetxController {
       customToast(response['Message']);
     }
   }
-
   goNext() {
     if (selectedItem == 'Select') {
       customToast('Please Select Service');

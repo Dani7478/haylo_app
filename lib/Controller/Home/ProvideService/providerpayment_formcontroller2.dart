@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/Controller/Home/ProvideService/providersubmit_alluserdata.dart';
 import 'package:haylo_app/Controller/toast.dart';
 import '../../../View/Common Widgets/navigate.dart';
 import '../../../View/Screens/Home/ProvideService/provider_addnewservice_view.dart';
@@ -23,7 +24,9 @@ class ProviderPaymentFormController2 extends GetxController {
     } else if (incorporationCtrl.text.isEmpty) {
       customToast('Please Enter icorporation date');
     } else {
-       moveUTD(screen: const ProviderAddNewServiceView());
+      var controller=Get.put(ProviderSubmitAllUserDataController());
+      controller.postUserData();
+       // moveUTD(screen: const ProviderAddNewServiceView());
     }
   }
 }

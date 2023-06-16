@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/View/Constants/consts.dart';
 import '../../Common Widgets/widgets_links.dart';
 import '../../Common Widgets/custom_textfield.dart';
 
@@ -58,7 +59,10 @@ class EntryPasswordView extends StatelessWidget {
               CustomTextField(
                   controller: Controller.passwordCtrl,
                   hintText: 'Enter Your, Email',
-                  abscr: false),
+                  abscr: false,
+                  error: 'Enter Valid Email',
+                  pattern: emailRegix,
+                  ),
 
               SizedBox(
                 height: 30.h,
@@ -69,7 +73,10 @@ class EntryPasswordView extends StatelessWidget {
               CustomTextField(
                   controller: Controller.confirmPasswordCtrl,
                   hintText: 'Confirm Password',
-                  abscr: false),
+                  abscr: false,
+                  error: 'Enter Strong password',
+                  pattern: passwordRegix,
+                  ),
 
               SizedBox(
                 height: 70.h,

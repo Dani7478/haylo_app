@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/Model/user_service.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_service_selecterview.dart';
@@ -71,11 +72,7 @@ class BookerSideProviderProfileView extends StatelessWidget {
                           },
                           child: ServiceRateCard(
                             role: 'user',
-                            image: serviceProviderImg,
-                            serviceName: 'Service Name',
-                            description:
-                                'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
-                            serviceRate: 30,
+                            service: new UserService(),
                           ),
                         );
                       }),

@@ -2,11 +2,15 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:haylo_app/Controller/api.dart';
+import 'package:haylo_app/Controller/toast.dart';
 import 'package:haylo_app/Services/api_service.dart';
+import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
+import 'package:haylo_app/View/Screens/Home/MainHome/Provider/provider_home_view.dart';
 import '../../controller_links.dart';
 import 'provideraddnewservice_controller.dart';
 
-class SubmitAllUserDataController extends GetxController {
+class ProviderSubmitAllUserDataController extends GetxController {
+
   var basicProfileCtrl = Get.put(ProvideProfileFormController());
   var providerCatCtrl = Get.put(ProviderCategoryFormController());
   var payment1Ctrl = Get.put(ProviderPaymentFormController());
@@ -18,7 +22,7 @@ class SubmitAllUserDataController extends GetxController {
     super.onInit();
   }
 
-  getAllUserData() async {
+  postUserData() async {
     Map<String, dynamic> alldata = {
       'first_name': basicProfileCtrl.firstNameCtrl.text,
       'last_name': basicProfileCtrl.lastNameCtrl.text,
@@ -45,7 +49,12 @@ class SubmitAllUserDataController extends GetxController {
     var responseData =
         await ApiService().postApiWithToken(alldata, updateProfile);
     var jsonData = json.decode(responseData);
-
-    print(jsonData);
+    
+    if (jsonData['status'] == true) {
+      customToast(jsonData['message']);
+      moveUTD(screen:  ProviderAddNewServiceController());
+    } else {
+      customToast(jsonData['message']);
+    }
   }
 }

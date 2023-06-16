@@ -4,8 +4,10 @@ import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haylo_app/Controller/Authentication/forgotpassword_controller.dart';
 import 'package:haylo_app/Controller/Authentication/varificationcode_controller.dart';
+import 'package:haylo_app/View/Common%20Widgets/custom_loadingbutton.dart';
 import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
+import '../../../Controller/Authentication/resetpassword_controller.dart';
 import '../../Common Widgets/common_text.dart';
 import '../../Common Widgets/custom_button2.dart';
 import '../../Common Widgets/custom_textfield.dart';
@@ -13,18 +15,23 @@ import 'package:get/get.dart';
 
 import '../../Common Widgets/varificationcode_input.dart';
 import '../../Constants/images.dart';
+import '../../Constants/regix.dart';
 
-class VarificationCodeView extends StatelessWidget {
-   VarificationCodeView({Key? key, required this.code}) : super(key: key);
-  String code;
+class ResetPasswordView extends StatelessWidget {
+  const ResetPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-    var controller=Get.put(VarificationCodeController());
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var controller = Get.put(ResetPasswordController());
     return Scaffold(
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: SizedBox(
@@ -112,7 +119,42 @@ class VarificationCodeView extends StatelessWidget {
 
                 //________________EMAIL SECTION
                 Expanded(
-                  child: VarificationSection(height: screenHeight, controllers: controller.controllers,),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        CommonText(text: 'New Password'),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        CustomTextField(
+                          controller: controller.confirmPasswordCtrl,
+                          hintText: 'Enter New Password',
+                          abscr: true,
+                          error: 'Enter Strong Password',
+                          pattern: passwordRegix,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        CommonText(text: 'Confirm Password'),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        CustomTextField(
+                          controller: controller.passwordCtrl,
+                          hintText: 'Confirm New Password',
+                          abscr: true,
+                          error: 'Enter Strong Password',
+                          pattern: passwordRegix,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
 
                 //_______________FORGOT BUTTON
@@ -121,36 +163,18 @@ class VarificationCodeView extends StatelessWidget {
                       left: 25, right: 25, bottom: screenHeight * 0.1),
                   child: Column(
                     children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Time Remaining',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            ': 30 Sec',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600),
-                          )
-                        ],
-                      ),
+
                       const SizedBox(
                         height: 8.0,
                       ),
-                      CustomButton2(
-                          name: 'Verify Code',
-                          task: () {
-                          //  moveUTD(screen: LoginView());
-                            controller.matchCode(code);
+                      GetBuilder<ResetPasswordController>(
+                          builder: (controller) {
+                            return controller.isloading == false
+                                ? CustomButton2(
+                                name: 'Save Password', task: () {
+                                  controller.resetNewPassword();
+                            })
+                                : const CustomLoadingButton();
                           })
                     ],
                   ),
@@ -159,51 +183,6 @@ class VarificationCodeView extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-class VarificationSection extends StatelessWidget {
-  VarificationSection({Key? key, required this.height, required this.controllers}) : super(key: key);
-  double height;
-  List<TextEditingController> controllers;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: height * 0.05, horizontal: 25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          VerificationCodeInput(controllers: controllers),
-          // VerificationCode(
-          //   textStyle: TextStyle(fontSize: 20.0, color: Colors.red[900]),
-          //   keyboardType: TextInputType.number,
-          //   underlineColor: Colors.amber, // If this is null it will use primaryColor: Colors.red from Theme
-          //   length: 4,
-          //   cursorColor: Colors.blue, // If this is null it will default to the ambient
-          //   // clearAll is NOT required, you can delete it
-          //   // takes any widget, so you can implement your design
-          //   clearAll: Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Text(
-          //       'clear all',
-          //       style: TextStyle(fontSize: 14.0, decoration: TextDecoration.underline, color: Colors.blue[700]),
-          //     ),
-          //   ),
-          //   onCompleted: (String value) {
-          //     // setState(() {
-          //     //   _code = value;
-          //     // });
-          //   },
-          //   onEditing: (bool value) {
-          //     // setState(() {
-          //     //   _onEditing = value;
-          //     // });
-          //     // if (!_onEditing) FocusScope.of(context).unfocus();
-          //   },
-          // ),
-        ],
       ),
     );
   }

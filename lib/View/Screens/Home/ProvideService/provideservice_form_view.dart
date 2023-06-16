@@ -4,6 +4,7 @@ import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import 'package:haylo_app/View/Screens/Home/ProvideService/provide_category_formview.dart';
 import '../../../Constants/images.dart';
@@ -79,7 +80,10 @@ class ProvideServiceFormView extends StatelessWidget {
               CustomTextField(
                   controller: controller.firstNameCtrl,
                   hintText: 'Enter Your First Name',
-                  abscr: false),
+                  abscr: false,
+                  error: 'field must be filled',
+                  pattern: nameRegix,
+                  ),
 
               SizedBox(
                 height: 10.h,
@@ -93,7 +97,10 @@ class ProvideServiceFormView extends StatelessWidget {
               CustomTextField(
                   controller: controller.lastNameCtrl,
                   hintText: 'Enter Last Name',
-                  abscr: false),
+                  abscr: false,
+                  error: 'field must be filled',
+                  pattern: nameRegix,
+                  ),
               SizedBox(
                 height: 10.h,
               ),
@@ -106,7 +113,10 @@ class ProvideServiceFormView extends StatelessWidget {
               CustomTextField(
                   controller: controller.emailCtrl,
                   hintText: 'Enter Your Email',
-                  abscr: false),
+                  abscr: false,
+                  error: 'email not valid',
+                  pattern: emailRegix,
+                  ),
               SizedBox(
                 height: 10.h,
               ),
@@ -120,7 +130,10 @@ class ProvideServiceFormView extends StatelessWidget {
                 return CustomTextField(
                     controller: controller.passwordCtrl,
                     hintText: 'Enter Your Password',
-                    abscr: true);
+                    abscr: true,
+                  error: 'lose password',
+                  pattern: passwordRegix,
+                  );
               }),
 
               //______________________TERMS COND

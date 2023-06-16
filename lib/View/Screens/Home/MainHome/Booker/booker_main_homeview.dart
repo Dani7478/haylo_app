@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_service_listview.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_service_selecterview.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerside_providerprofileview.dart';
-
+import '../../../../../Controller/controller_links.dart';
 import '../../../../Common Widgets/widgets_links.dart';
 import '../../../../Constants/images.dart';
 
@@ -14,138 +15,149 @@ class BookerMainHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller=Get.put(BookerMainHomeController());
     return SafeArea(
       child: SizedBox(
         height: double.infinity,
         width: double.infinity,
-        child: ListView(children: [
-          Container(
-              width: double.infinity,
-              height: 350.h,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      mainHomeBgImage,
-                    ),
-                    fit: BoxFit.fill),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 1.w),
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    width: double.infinity,
-                    height: 70.h,
-                    decoration: BoxDecoration(
-                      color: purpleColor,
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(10.w),
-                        bottomLeft: Radius.circular(10.w),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MainTextWidget(
-                            text: 'Booking Started',
-                            fontColor: whiteColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            align: TextAlign.start),
-                        // MainTextWidget(
-                        //     text: '05:58:15',
-                        //     fontColor: whiteColor,
-                        //     fontSize: 14.sp,
-                        //     fontWeight: FontWeight.w500,
-                        //     align: TextAlign.start)
-
-                        const HeaderTime(),
-                      ],
-                    ),
+        child: GetBuilder<BookerMainHomeController>(
+          builder: (controller) {
+            return controller.loadingData==true? const Center(
+              child: SizedBox(
+                height: 50,
+                  width: 50,
+                  child:  CircularProgressIndicator()),
+            ) :  ListView(children: [
+              Container(
+                  width: double.infinity,
+                  height: 350.h,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          mainHomeBgImage,
+                        ),
+                        fit: BoxFit.fill),
                   ),
-                   MainHomeTopAppBar(role: 'booker'),
-                  CleanerSection(name: 'jhon'),
-                ],
-              )),
-          Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
-              child: MainTextWidget(
-                  text: 'Category',
-                  fontColor: Colors.black,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w500,
-                  align: TextAlign.start)),
-          SizedBox(
-            height: 120.h,
-            child: ListView.builder(
-              scrollDirection:
-                  Axis.horizontal, // Set the scroll direction to horizontal
-              itemCount: 30,
-              itemBuilder: (context, index) {
-                return CategoryCircleCard(
-                  image: electricianImg,
-                  name: 'Electrtian',
-                );
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 15.w),
-            child: MainTextWidget(
-                text: 'Recomended Providers',
-                fontColor: blackTextColor,
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
-                align: TextAlign.start),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
-            height: 220.h,
-            child: ListView.builder(
-              scrollDirection:
-                  Axis.horizontal, // Set the scroll direction to horizontal
-              itemCount: 30,
-              itemBuilder: (context, index) {
-                return RecomendedProviderCard();
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 15.w),
-            child: MainTextWidget(
-                text: 'Recomended Services',
-                fontColor: blackTextColor,
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
-                align: TextAlign.start),
-          ),
-          Container(
-            margin: EdgeInsets.all(15.h),
-            height: 650.h,
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: (){
-                    moveUTD(
-                      screen: const BookerServiceSelector(),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 1.w),
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        width: double.infinity,
+                        height: 70.h,
+                        decoration: BoxDecoration(
+                          color: purpleColor,
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(10.w),
+                            bottomLeft: Radius.circular(10.w),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            MainTextWidget(
+                                text: 'Booking Started',
+                                fontColor: whiteColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                align: TextAlign.start),
+                            // MainTextWidget(
+                            //     text: '05:58:15',
+                            //     fontColor: whiteColor,
+                            //     fontSize: 14.sp,
+                            //     fontWeight: FontWeight.w500,
+                            //     align: TextAlign.start)
+
+                            const HeaderTime(),
+                          ],
+                        ),
+                      ),
+                        MainHomeTopAppBar(role: 'booker'),
+                       CleanerSection(name: '${controller.user!.firstName} ${controller.user!.lastName}'),
+                    ],
+                  )),
+              Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+                  child: MainTextWidget(
+                      text: 'Category',
+                      fontColor: Colors.black,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      align: TextAlign.start)),
+              SizedBox(
+                height: 120.h,
+                child: ListView.builder(
+                  scrollDirection:
+                      Axis.horizontal, // Set the scroll direction to horizontal
+                  itemCount: controller.serviceList.length,
+                  itemBuilder: (context, index) {
+                    return CategoryCircleCard(
+                      image: controller.serviceList[index].category_image!,
+                      name: controller.serviceList[index].category_name!,
+                      id:int.parse(controller.serviceList[index].id!),
                     );
                   },
-                  child: ServiceProviderCard(
-                    image: serviceProviderImg,
-                    star: 4.5,
-                    description:
-                        'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
-                    name: 'John Smith',
-                    rate: 30,
-                  ),
-                );
-              },
-            ),
-          ),
-        ]),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15.w),
+                child: MainTextWidget(
+                    text: 'Recomended Providers',
+                    fontColor: blackTextColor,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                    align: TextAlign.start),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+                height: 220.h,
+                child: ListView.builder(
+                  scrollDirection:
+                      Axis.horizontal, // Set the scroll direction to horizontal
+                  itemCount: 30,
+                  itemBuilder: (context, index) {
+                    return RecomendedProviderCard();
+                  },
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15.w),
+                child: MainTextWidget(
+                    text: 'Recomended Services',
+                    fontColor: blackTextColor,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                    align: TextAlign.start),
+              ),
+              Container(
+                margin: EdgeInsets.all(15.h),
+                height: 650.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: (){
+                        moveUTD(
+                          screen: const BookerServiceSelector(),
+                        );
+                      },
+                      child: ServiceProviderCard(
+                        image: serviceProviderImg,
+                        star: 4.5,
+                        description:
+                            'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
+                        name: 'John Smith',
+                        rate: 30,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ]);
+          }
+        ),
       ),
     );
   }
@@ -214,9 +226,10 @@ class HeaderTime extends StatelessWidget {
 
 
 class CategoryCircleCard extends StatelessWidget {
-  CategoryCircleCard({super.key, required this.image, required this.name});
+  CategoryCircleCard({super.key, required this.image, required this.name,required this.id});
   String image;
   String name;
+  int id;
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +239,7 @@ class CategoryCircleCard extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              moveLTR(screen: const BookerServiceListView());
+              moveLTR(screen:  BookerServiceListView(id: id,));
             },
             child: Container(
               padding: EdgeInsets.all(15.0.h),
@@ -244,7 +257,7 @@ class CategoryCircleCard extends StatelessWidget {
               child: SizedBox(
                   height: 40.h,
                   width: 40.h,
-                  child: Image.asset(
+                  child: Image.network(
                     image,
                     fit: BoxFit.cover,
                   )),

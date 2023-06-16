@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haylo_app/Controller/controller_links.dart';
+import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Authentication/varification_code_view.dart';
 import '../../Common Widgets/widgets_links.dart';
 import 'package:get/get.dart';
 
 import '../../Constants/images.dart';
-
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
@@ -16,28 +16,33 @@ class ForgotPasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    Get.put(ForgotPasswordController());
-
+   var controller= Get.put(ForgotPasswordController());
 
     return Scaffold(
       body: SizedBox(
         height: screenHeight,
         width: screenWidth,
         child: Padding(
-          padding:  EdgeInsets.only(top: 28.h, left: 15, right: 15),
+          padding: EdgeInsets.only(top: 28.h, left: 15, right: 15),
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.start,
             children: [
-            const BackMoveAppBar(),
-             SizedBox(height: 42.h,),
+              const BackMoveAppBar(),
+              SizedBox(
+                height: 42.h,
+              ),
 
-               SizedBox(
-                height:135.h,
+              SizedBox(
+                height: 135.h,
                 width: 203.w,
                 //color: Colors.purple,
-                child: Image.asset(forgotPasswordImg, ),
+                child: Image.asset(
+                  forgotPasswordImg,
+                ),
               ),
-              SizedBox(height: 30.h,),
+              SizedBox(
+                height: 30.h,
+              ),
 
               //__________________MID TEXT
               SizedBox(
@@ -54,7 +59,9 @@ class ForgotPasswordView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10.h,),
+              SizedBox(
+                height: 10.h,
+              ),
 
               SizedBox(
                 width: double.infinity,
@@ -77,12 +84,21 @@ class ForgotPasswordView extends StatelessWidget {
               //________________EMAIL SECTION
               EmailSection(height: screenHeight),
 
-              SizedBox(height: 80.h,),
+              SizedBox(
+                height: 80.h,
+              ),
 
               //_______________FORGOT BUTTON
-              CustomButton2(name: 'Next', task: () {
-                moveLTR(screen: const VarificationCodeView());
-              }),
+             GetBuilder<ForgotPasswordController>(
+               builder: (controller){
+               return controller.isloading==false? CustomButton2(
+                     name: 'Next',
+                     task: () {
+                       controller.sentCode();
+                       //moveLTR(screen: const VarificationCodeView());
+                     }): const CustomLoadingButton();
+               },
+             ),
             ],
           ),
         ),
@@ -90,7 +106,6 @@ class ForgotPasswordView extends StatelessWidget {
     );
   }
 }
-
 
 class EmailSection extends StatelessWidget {
   EmailSection({Key? key, required this.height}) : super(key: key);
@@ -105,11 +120,15 @@ class EmailSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CommonText(text: 'Email Address'),
-          SizedBox(height: height * 0.01,),
+          SizedBox(
+            height: height * 0.01,
+          ),
           CustomTextField(
             controller: controller.emailCtrl,
             hintText: 'Enter Your Email',
             abscr: false,
+            error: 'Please Enter valid email',
+            pattern: emailRegix,
           ),
         ],
       ),

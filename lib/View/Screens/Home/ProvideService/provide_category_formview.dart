@@ -6,9 +6,10 @@ import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import 'package:haylo_app/View/Screens/Home/ProvideService/provider_paymentform_view.dart';
 
-import '../../../../Controller/Home/ProvideService/submit_alluserdata.dart';
+import '../../../../Controller/Home/ProvideService/providersubmit_alluserdata.dart';
 import '../../../../Controller/controller_links.dart';
 import '../../../Constants/colors.dart';
+import '../../../Constants/consts.dart';
 import '../../../Constants/images.dart';
 
 class ProvideGategoryFormView extends StatelessWidget {
@@ -130,7 +131,10 @@ class MainForm extends StatelessWidget {
             CustomTextField(
                 controller: controller.uniqueSkillCtrl,
                 hintText: 'Type Here',
-                abscr: false),
+                abscr: false,
+                 error: 'Enter Something',
+                  pattern: nameRegix,
+                ),
             SizedBox(
               height: 20.h,
             ),

@@ -7,6 +7,7 @@ import 'package:haylo_app/View/Screens/Home/ProvideService/provider_paymentform_
 
 import '../../../Common Widgets/widgets_links.dart';
 import '../../../Constants/colors.dart';
+import '../../../Constants/regix.dart';
 import '../../Authentication/login_view.dart';
 
 class ProviderPaymentFormView extends StatelessWidget {
@@ -59,7 +60,7 @@ class ProviderPaymentFormView extends StatelessWidget {
               CustomButton2(
                   name: 'Next',
                   task: () {
-                  controller.goNext();
+                    controller.goNext();
                   }),
               SizedBox(
                 height: 40.h,
@@ -78,149 +79,167 @@ class MainForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProviderPaymentFormController());
-    return GetBuilder<ProviderPaymentFormController>(builder: (controller){
+    return GetBuilder<ProviderPaymentFormController>(builder: (controller) {
       return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 25.h,
-          ),
-          MainTextWidget(
-              text: 'Phone Number',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 25.h,
+            ),
+            MainTextWidget(
+                text: 'Phone Number',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomTextField(
               controller: controller.phonNoCtrl,
               hintText: 'Type here',
-              abscr: false),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'Gender',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomDropdownWidget(
-            itemList: controller.genderList,
-            selectedItem: controller.selectedGender,
-            type: 'gender',
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'Select Nationality',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomDropdownWidget(
-            itemList: controller.nationalityList,
-            selectedItem: controller.selectedNationality,
-            type: 'nationality',
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'State',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
+              abscr: false,
+              error: 'Enter valid phone no',
+              pattern: phoneRegix,
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'Gender',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomDropdownWidget(
+              itemList: controller.genderList,
+              selectedItem: controller.selectedGender,
+              type: 'gender',
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'Select Nationality',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomDropdownWidget(
+              itemList: controller.nationalityList,
+              selectedItem: controller.selectedNationality,
+              type: 'nationality',
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'State',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomTextField(
               controller: controller.stateCtrl,
               hintText: 'Type Here',
-              abscr: false),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'City',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
+              abscr: false,
+              error: 'Enter Something',
+              pattern: nameRegix,
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'City',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomTextField(
               controller: controller.cityCtrl,
               hintText: 'Type Here',
-              abscr: false),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'Address',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
+              abscr: false,
+              error: 'Enter Something',
+              pattern: nameRegix,
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'Address',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomTextField(
               controller: controller.addressCtrl,
               hintText: 'Type Here',
-              abscr: false),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'Postal code',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
+              abscr: false,
+              error: 'Enter Something',
+              pattern: nameRegix,
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'Postal code',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomTextField(
               controller: controller.postalCtrl,
               hintText: 'Type Here',
-              abscr: false),
-          SizedBox(
-            height: 12.h,
-          ),
-          MainTextWidget(
-              text: 'National Id /SSN',
-              fontColor: Colors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
-              align: TextAlign.left),
-          SizedBox(
-            height: 5.h,
-          ),
-          CustomTextField(
+              abscr: false,
+              error: 'Enter Something',
+              pattern: nameRegix,
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            MainTextWidget(
+                text: 'National Id /SSN',
+                fontColor: Colors.black,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+                align: TextAlign.left),
+            SizedBox(
+              height: 5.h,
+            ),
+            CustomTextField(
               controller: controller.nationalIdCtrl,
               hintText: 'Type Here',
-              abscr: false),
-          SizedBox(
-            height: 20.h,
-          ),
-        ],
-      ),
-    );
+              abscr: false,
+              error: 'Enter Something',
+              pattern: nameRegix,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+          ],
+        ),
+      );
     });
   }
 }
@@ -261,7 +280,8 @@ class CustomDropdownWidget extends StatelessWidget {
                         if (type == 'gender') {
                           controler.changeGender(gneder: newValue.toString());
                         } else {
-                           controler.changeNationality(nationality: newValue.toString());
+                          controler.changeNationality(
+                              nationality: newValue.toString());
                         }
                       },
                       items: itemList.map<DropdownMenuItem<String>>(

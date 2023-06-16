@@ -10,8 +10,8 @@ import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Screens/Universal/all_done_view.dart';
 import '../../../Constants/images.dart';
 
-class AddPaymentFormView extends StatelessWidget {
-  const AddPaymentFormView({Key? key}) : super(key: key);
+class BookerAddPaymentFormView extends StatelessWidget {
+  const BookerAddPaymentFormView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

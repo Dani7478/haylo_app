@@ -1,5 +1,7 @@
 export 'Authentication/login_controller.dart';
 export 'Authentication/forgotpassword_controller.dart';
+export 'Authentication/varificationcode_controller.dart';
+export 'Authentication/resetpassword_controller.dart';
 export 'Authentication/password_entry_controller.dart';
 export 'Home/BookService/bookservice_formcontroller.dart';
 export 'Home/BookService/addpayment_controller.dart';
@@ -12,3 +14,7 @@ export 'Home/MainHome/Booker/booker_search_controller.dart';
 export 'Home/MainHome/Booker/booker_location_controller.dart';
 export 'Home/MainHome/Provider/provider_bottomappbar_controller.dart';
 export 'Home/MainHome/Provider/provider_mainhome_controller.dart';
+export 'Home/MainHome/Provider/providerprofile_controller.dart';
+export 'Home/MainHome/Booker/booker_mainhome_controller.dart';
+export 'Home/MainHome/Booker/bookerservice_controller.dart';
+
