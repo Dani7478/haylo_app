@@ -35,12 +35,17 @@ class ProviderMainHomeView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MainTextWidget(
-                        text: 'Booking Started',
-                        fontColor: whiteColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        align: TextAlign.start),
+                    GestureDetector(
+                      onTap: (){
+                        controller.getAllBookingDeatail();
+                      },
+                      child: MainTextWidget(
+                          text: 'Booking Started',
+                          fontColor: whiteColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          align: TextAlign.start),
+                    ),
                     // MainTextWidget(
                     //     text: '05:58:15',
                     //     fontColor: whiteColor,
