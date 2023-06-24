@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/Controller/Home/ProvideService/provideraddnewservice_controller.dart';
 import 'package:haylo_app/Model/user_service.dart';
+import '../../Model/service.dart';
 import '../Constants/colors.dart';
 import '../Constants/images.dart';
 import 'widgets_links.dart';
@@ -14,7 +15,7 @@ class ServiceRateCard extends StatelessWidget {
     required this.service,
   });
   String role;
-  UserService service;
+  Services service;
 
   @override
   Widget build(BuildContext context) {
@@ -25,26 +26,35 @@ class ServiceRateCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Center(
         child: ListTile(
-          leading: SizedBox(
-            height: 56.h,
+          leading: Container(
+            height: 80.h,
             width: 73.w,
-            child: Image.asset(provideService1),
+           decoration: BoxDecoration(
+             borderRadius: BorderRadius.circular(12.0),
+             image: DecorationImage(
+               image: NetworkImage(
+                  service.image!
+               ),
+               fit: BoxFit.cover
+             )
+           ),
           ),
           title: MainTextWidget(
             text: service.name!,
-            fontSize: 12.sp,
+            fontSize: 14,
             fontColor: Colors.black,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
             align: TextAlign.left,
           ),
           subtitle: Container(
             margin: EdgeInsets.only(top: 3.h),
-            // width: 200.w,
+            // width: 300.w,
             child: MainTextWidget(
-              text:service.description!,
-              fontSize: 8.sp,
-              fontColor: Colors.black,
-              fontWeight: FontWeight.w300,
+              //error remoive in split wise
+              text:'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
+              fontSize: 12,
+              fontColor: descriptionTextColor,
+              fontWeight: FontWeight.w400,
               align: TextAlign.start,
             ),
           ),
@@ -54,7 +64,7 @@ class ServiceRateCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                    height: 35.h,
+                    height: 40.h,
                     width: 65.w,
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -66,9 +76,9 @@ class ServiceRateCard extends StatelessWidget {
                     child: Center(
                       child: MainTextWidget(
                         text: '${service.priceCurrency} ${service.perHourPrice} /HR',
-                        fontSize: 10.sp,
+                        fontSize: 11.sp,
                         fontColor: Colors.black,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         align: TextAlign.left,
                       ),
                     )),
@@ -90,6 +100,62 @@ class ServiceRateCard extends StatelessWidget {
             ),
           ),
         ),
+        // child: Container(
+        //   child: Row(
+        //     children: [
+        //       //________image
+        //         Container(
+        //           height: 58.h,
+        //           width: 87.w,
+        //          decoration: BoxDecoration(
+        //            borderRadius: BorderRadius.circular(12.0),
+        //            image: DecorationImage(
+        //              image: NetworkImage(
+        //                 service.image!
+        //              ),
+        //              fit: BoxFit.cover
+        //            )
+        //          ),
+        //         ),
+        //       SizedBox(
+        //         width: 10.w,
+        //       ),
+        //       Container(
+        //         child: Column(
+        //           mainAxisAlignment: MainAxisAlignment.start,
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //              MainTextWidget(
+        //                 text: service.name!,
+        //                 fontSize: 14,
+        //                 fontColor: Colors.black,
+        //                 fontWeight: FontWeight.w600,
+        //                 align: TextAlign.left,
+        //               ),
+        //
+        //             SizedBox(
+        //               height: 8.h,
+        //             ),
+        //
+        //                Container(
+        //                 margin: EdgeInsets.only(top: 3.h),
+        //                 // width: 300.w,
+        //                 child: MainTextWidget(
+        //                   text:service.description!,
+        //                   fontSize: 10,
+        //                   fontColor: descriptionTextColor,
+        //                   fontWeight: FontWeight.w300,
+        //                   align: TextAlign.start,
+        //                 ),
+        //               ),
+        //           ],
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        //
+        //
+        // ),
       ),
     );
   }

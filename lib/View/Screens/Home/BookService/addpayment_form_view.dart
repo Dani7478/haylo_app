@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haylo_app/Controller/controller_links.dart';
-import 'package:haylo_app/View/Common%20Widgets/backmove_appbar.dart';
+import 'package:haylo_app/View/Common%20Widgets/backmover_circular.dart';
 import 'package:haylo_app/View/Common%20Widgets/custom_button2.dart';
 import 'package:haylo_app/View/Common%20Widgets/customfield_bottomBorder.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
@@ -35,7 +35,7 @@ class BookerAddPaymentFormView extends StatelessWidget {
               height: 5.h,
             ),
             MainTextWidget(
-                text: 'Provide your Payment Detail',
+                text: 'Provide your payment details',
                 fontColor: Colors.black,
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w300,

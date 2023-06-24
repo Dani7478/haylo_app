@@ -13,6 +13,35 @@ class SignupSelectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      bottomNavigationBar: Padding(
+        padding:  EdgeInsets.only(bottom: 40.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:  [
+            const Text(
+              'Already have an account?',
+              style: TextStyle(
+                  color: purpleColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300),
+            ),
+            TextButton(
+                onPressed: () {
+                  moveLTR(
+                      screen:const LoginView()
+                  );
+                },
+                child: const Text(
+                  'Sign In',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
+                ))
+          ],
+        ),
+      ),
       body: SafeArea(
         child: SizedBox(
           height: double.infinity,
@@ -38,8 +67,8 @@ class SignupSelectionView extends StatelessWidget {
                           MainTextWidget(
                         text: 'Haylo',
                         fontColor: Colors.white,
-                        fontSize: 47.sp,
-                        fontWeight: FontWeight.w800,
+                        fontSize: 47,
+                        fontWeight: FontWeight.w600,
                         align: TextAlign.center,
                       ),
                       
@@ -89,15 +118,16 @@ class SignupSelectionView extends StatelessWidget {
                       MainTextWidget(
                         text: 'Hi, Nice To Meet You!',
                         fontColor: Colors.black,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
                         align: TextAlign.left,
                       ),
+                      SizedBox(height: 10.h,),
                       MainTextWidget(
                         text: 'Continue as',
-                        fontColor: Color(0xFF373737),
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w300,
+                        fontColor: const Color(0xFF373737),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
                         align: TextAlign.left,
                       ),
                       SizedBox(
@@ -164,31 +194,7 @@ class SignupSelectionView extends StatelessWidget {
                       SizedBox(
                         height: 50.h,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:  [
-                          const Text(
-                            'Already have an account?',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w200),
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                moveLTR(
-                                  screen:const LoginView()
-                                );
-                              },
-                              child: const Text(
-                                'Sign In',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
-                              ))
-                        ],
-                      ),
+
                     ],
                   ),
                 ),

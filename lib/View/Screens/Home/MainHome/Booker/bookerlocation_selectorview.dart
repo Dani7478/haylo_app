@@ -2,32 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/Controller/controller_links.dart';
+import 'package:haylo_app/Model/providerdetail_model.dart';
+import 'package:haylo_app/Model/service.dart';
 import 'package:haylo_app/View/Common%20Widgets/backmove_withtitle.dart';
 import 'package:haylo_app/View/Common%20Widgets/custom_button2.dart';
 import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booking_confirmed_view.dart';
 
+import '../../../../../Model/uniquecategory_model.dart';
 import '../../../../Constants/colors.dart';
 import '../../../../Constants/images.dart';
 import '../../../../Constants/styles.dart';
 
 class BookerLocationSelectorView extends StatelessWidget {
-  const BookerLocationSelectorView({super.key});
+  BookerLocationSelectorView(
+      {super.key,
+      required this.service,
+      required this.provider,
+      required this.date,
+      required this.time,
+        required this.immediately,
+      });
+
+  Services service;
+  UniqueCategoryModel provider;
+  String date;
+  String time;
+  bool immediately;
 
   @override
   Widget build(BuildContext context) {
+    var controler = Get.put(BookerLocationController());
+
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-        child: CustomButton2(name: 'Select Location', task: (){
-          moveUTD(screen: const BookerBookingConfirmed());
-        }),
-      ),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+        child: CustomButton2(
+            name: 'Select Location',
+            task: () {
+              controler.goNext(provider, service, date, time,immediately);
 
+            }),
+      ),
       floatingActionButton: CircleAvatar(
         radius: 30.0.h,
         backgroundColor: Colors.white,
-        child: Icon(Icons.add_circle_outline_outlined, color: purpleColor, size: 30.h,),
+        child: Icon(
+          Icons.add_circle_outline_outlined,
+          color: purpleColor,
+          size: 30.h,
+        ),
       ),
       body: SizedBox(
         height: context.height,
@@ -41,7 +65,7 @@ class BookerLocationSelectorView extends StatelessWidget {
                 height: 1000,
                 width: context.width,
                 //color: Colors.blueAccent,
-                child:  Center(child: Image.asset(mapssImg)),
+                child: Center(child: Image.asset(mapssImg)),
               ),
             ),
             Padding(
@@ -60,12 +84,9 @@ class BookerLocationSelectorView extends StatelessWidget {
           ],
         ),
       ),
-      
     );
   }
 }
-
-
 
 class SearchBar extends StatelessWidget {
   const SearchBar({super.key});
@@ -80,7 +101,7 @@ class SearchBar extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15.0),
-          boxShadow:  const [
+          boxShadow: const [
             BoxShadow(
               color: containerShadowClr,
               spreadRadius: 1,

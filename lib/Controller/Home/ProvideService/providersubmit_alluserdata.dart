@@ -45,16 +45,30 @@ class ProviderSubmitAllUserDataController extends GetxController {
       'phone': payment1Ctrl.phonNoCtrl.text,
       'category_id': '1',
     };
+  //  print(alldata);
+
+
 
     var responseData =
-        await ApiService().postApiWithToken(alldata, updateProfile);
+    await ApiService().postApiWithToken(alldata, updateProfile);
     var jsonData = json.decode(responseData);
-    
-    if (jsonData['status'] == true) {
+    print(jsonData);
+    if (jsonData['status']==true) {
       customToast(jsonData['message']);
-      moveUTD(screen:  ProviderAddNewServiceController());
+      return true;
     } else {
       customToast(jsonData['message']);
+      return false;
     }
+    try{
+
+    }catch(error){
+      print('ERROR : ${error}');
+      return false;
+    }
+
+
+
+
   }
 }

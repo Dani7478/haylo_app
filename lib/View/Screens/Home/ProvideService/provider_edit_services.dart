@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/Model/user_service.dart';
-import 'package:haylo_app/View/Common%20Widgets/backmove_appbar.dart';
+import 'package:haylo_app/View/Common%20Widgets/backmover_circular.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 
 import '../../../../Controller/Home/ProvideService/provideraddnewservice_controller.dart';
 import '../../../../Controller/Home/ProvideService/providersubmit_alluserdata.dart';
+import '../../../../Model/service.dart';
 import '../../../Common Widgets/customprice_textfield.dart';
 import '../../Universal/all_done_view.dart';
 
@@ -38,7 +39,10 @@ class ProviderEditServicesView extends StatelessWidget {
             SizedBox(
               height: 29.h,
             ),
-            BackMoveAppBarWithTitle(titleName: 'Edit Service'),
+            BackMoveAppBarWithTitle2(titleName: 'Edit Service'),
+            const Divider(
+              thickness: 1.3,
+            ),
             SizedBox(
               height: 28.h,
             ),
@@ -225,7 +229,7 @@ class ServiceProviderCard extends StatelessWidget {
       {super.key,
       required this.service});
 
- UserService service;
+ Services service;
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProviderAddNewServiceController());
@@ -234,100 +238,105 @@ class ServiceProviderCard extends StatelessWidget {
       //  padding: EdgeInsets.only(left: 5.w, right: 5.w),
       padding: EdgeInsets.symmetric(vertical: 12.h),
       child: Center(
-        child: ListTile(
-          leading: SizedBox(
-            height: 56.h,
-            width: 73.w,
-            child: Image.asset(provideService1),
-          ),
-          title: MainTextWidget(
-            text: service.name!,
-            fontSize: 12.sp,
-            fontColor: Colors.black,
-            fontWeight: FontWeight.w500,
-            align: TextAlign.left,
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 3.h),
-                // width: 200.w,
-                child: MainTextWidget(
-                  text: service.description!,
-                  fontSize: 8.sp,
-                  fontColor: Colors.black,
-                  fontWeight: FontWeight.w300,
-                  align: TextAlign.start,
-                ),
+        child: Column(
+          children: [
+            ListTile(
+              leading: SizedBox(
+                height: 56.h,
+                width: 73.w,
+                child: Image.asset(provideService1),
               ),
-             const SizedBox(height: 5.0,),
-              MainTextWidget(
-                text: '${service.priceCurrency} ${service.perHourPrice}/hr',
-                fontSize: 12.sp,
+              title: MainTextWidget(
+                text: service.name!,
+                fontSize: 14.sp,
                 fontColor: Colors.black,
                 fontWeight: FontWeight.w500,
                 align: TextAlign.left,
               ),
-            ],
-          ),
-          trailing: SizedBox(
-            width: 100.w,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: (){
-                    addServiceDialogBox(service);
-                  },
-                  child: Container(
-                      height: 37.h,
-                      width: 37.w,
-                      decoration: BoxDecoration(
-                        color: containerLightBlueClr,
-                        // width: 1.0,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 3.h),
+                    // width: 200.w,
+                    child: MainTextWidget(
+                      text: service.description!,
+                      fontSize: 10.sp,
+                      fontColor: descriptionTextColor,
+                      fontWeight: FontWeight.w300,
+                      align: TextAlign.start,
+                    ),
+                  ),
+                  const SizedBox(height: 5.0,),
+                  MainTextWidget(
+                    text: '${service.priceCurrency} ${service.perHourPrice}/hr',
+                    fontSize: 12.sp,
+                    fontColor: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    align: TextAlign.left,
+                  ),
+                ],
+              ),
+              trailing: SizedBox(
+                width: 84.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        addServiceDialogBox(service);
+                      },
+                      child: Container(
+                          height: 37.h,
+                          width: 37.w,
+                          decoration: BoxDecoration(
+                            color: containerLightBlueClr,
+                            // width: 1.0,
 
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Center(
-                          child: Icon(
-                        Icons.edit,
-                        size: 18.0,
-                        color: grayColor,
-                      ))),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                GestureDetector(
-                  onTap: (){
-                    controller.deleteService(service);
-                  },
-                  child: Container(
-                      height: 37.h,
-                      width: 37.w,
-                      decoration: BoxDecoration(
-                        color: containerLightBlueClr,
-                        // width: 1.0,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.edit,
+                                size: 18.0,
+                                color: grayColor,
+                              ))),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        controller.deleteService(service);
+                      },
+                      child: Container(
+                          height: 37.h,
+                          width: 37.w,
+                          decoration: BoxDecoration(
+                            color: containerLightBlueClr,
+                            // width: 1.0,
 
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Center(
-                          child: Icon(
-                        Icons.delete,
-                        size: 18.0,
-                        color: grayColor,
-                      ))),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.delete,
+                                size: 18.0,
+                                color: grayColor,
+                              ))),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+           const Divider(),
+          ],
         ),
       ),
     );
   }
 
-  void addServiceDialogBox(UserService service) {
+  void addServiceDialogBox(Services service) {
     var controller = Get.put(ProviderAddNewServiceController());
     controller.fillData(service);
 

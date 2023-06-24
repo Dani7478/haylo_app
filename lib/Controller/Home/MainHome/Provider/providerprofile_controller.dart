@@ -8,6 +8,7 @@ import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import 'package:haylo_app/View/Screens/Home/splash_screen.dart';
 import '../../../../Model/user.dart';
 import '../../../../Services/api_service.dart';
+import '../../../Authentication/login_controller.dart';
 import '../../../api.dart';
 import 'package:intl/intl.dart';
 
@@ -39,6 +40,9 @@ class ProviderProfileController extends GetxController {
     if (jsonResponse['status'] == true) {
       customToast('Logout');
       LocalStorage().clearCache();
+      LocalStorage().clearCache();
+      Get.find<LoginController>().emailCtrl.text='';
+      Get.find<LoginController>().passwrdCtrl.text='';
       moveUTD(screen: const LoginView());
     } else {
       customToast('Somehting went wrong');

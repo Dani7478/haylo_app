@@ -101,6 +101,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
 
     return Container(
+    //  height: 50,
       // decoration: BoxDecoration(
       //   border: Border.all(
       //     color: grayColor,
@@ -125,9 +126,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             errorText: isEmailValid ? null : widget.error,
             hintText: widget.hintText,
             hintStyle:
-                GoogleFonts.poppins(fontSize: 13.sp, color: Color(0xFF747474)),
+                GoogleFonts.poppins(fontSize: 13.sp, color: Colors.black26),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 18.0),
            // border: InputBorder.none,
             suffixIcon: widget.abscr == true
                 ? Icon(

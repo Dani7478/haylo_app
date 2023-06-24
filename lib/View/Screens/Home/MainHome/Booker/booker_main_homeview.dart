@@ -7,8 +7,11 @@ import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_service_listv
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_service_selecterview.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerside_providerprofileview.dart';
 import '../../../../../Controller/controller_links.dart';
+import '../../../../../Model/booker_home_model.dart';
+import '../../../../../Model/categories.dart';
 import '../../../../Common Widgets/widgets_links.dart';
 import '../../../../Constants/images.dart';
+import 'booker_unique_provider_listview.dart';
 
 class BookerMainHomeView extends StatelessWidget {
   const BookerMainHomeView({super.key});
@@ -22,12 +25,7 @@ class BookerMainHomeView extends StatelessWidget {
         width: double.infinity,
         child: GetBuilder<BookerMainHomeController>(
           builder: (controller) {
-            return controller.loadingData==true? const Center(
-              child: SizedBox(
-                height: 50,
-                  width: 50,
-                  child:  CircularProgressIndicator()),
-            ) :  ListView(children: [
+            return controller.loadingData==true? const LoadingView() :  ListView(children: [
               Container(
                   width: double.infinity,
                   height: 350.h,
@@ -44,7 +42,7 @@ class BookerMainHomeView extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 1.w),
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
                         width: double.infinity,
-                        height: 70.h,
+                        height: 38.h,
                         decoration: BoxDecoration(
                           color: purpleColor,
                           borderRadius: BorderRadius.only(
@@ -55,12 +53,18 @@ class BookerMainHomeView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            MainTextWidget(
-                                text: 'Booking Started',
-                                fontColor: whiteColor,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                align: TextAlign.start),
+                            InkWell(
+
+                              onTap:(){
+                                controller.getBookerHomeData();
+                              },
+                              child: MainTextWidget(
+                                  text: 'Booking Started',
+                                  fontColor: whiteColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  align: TextAlign.start),
+                            ),
                             // MainTextWidget(
                             //     text: '05:58:15',
                             //     fontColor: whiteColor,
@@ -73,29 +77,27 @@ class BookerMainHomeView extends StatelessWidget {
                         ),
                       ),
                         MainHomeTopAppBar(role: 'booker'),
-                       CleanerSection(name: '${controller.user!.firstName} ${controller.user!.lastName}'),
+                       CleanerSection(name: '${controller.user!.lastName}'),
                     ],
                   )),
               Container(
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+                  margin: EdgeInsets.only(left: 13, right: 13, top: 20, bottom: 10),
                   child: MainTextWidget(
                       text: 'Category',
                       fontColor: Colors.black,
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       align: TextAlign.start)),
               SizedBox(
                 height: 120.h,
                 child: ListView.builder(
                   scrollDirection:
                       Axis.horizontal, // Set the scroll direction to horizontal
-                  itemCount: controller.serviceList.length,
+                  itemCount: controller.bookerHomeData!.categories!.length!,
                   itemBuilder: (context, index) {
                     return CategoryCircleCard(
-                      image: controller.serviceList[index].category_image!,
-                      name: controller.serviceList[index].category_name!,
-                      id:int.parse(controller.serviceList[index].id!),
+                     category: controller.bookerHomeData!.categories![index],
                     );
                   },
                 ),
@@ -103,10 +105,10 @@ class BookerMainHomeView extends StatelessWidget {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 15.w),
                 child: MainTextWidget(
-                    text: 'Recomended Providers',
+                    text: 'Recommended Providers',
                     fontColor: blackTextColor,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
                     align: TextAlign.start),
               ),
               Container(
@@ -115,19 +117,26 @@ class BookerMainHomeView extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection:
                       Axis.horizontal, // Set the scroll direction to horizontal
-                  itemCount: 30,
+                  itemCount: controller.bookerHomeData?.recommendedProviders?.length,
                   itemBuilder: (context, index) {
-                    return RecomendedProviderCard();
+                    return  GestureDetector(
+                      onTap: (){
+                        //moveUTD(Provider)
+                      },
+                      child: RecomendedProviderCard(
+                        recomendedprovider: controller.bookerHomeData!.recommendedProviders![index],
+                      ),
+                    );
                   },
                 ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 15.w),
                 child: MainTextWidget(
-                    text: 'Recomended Services',
+                    text: 'Recommended Services',
                     fontColor: blackTextColor,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
                     align: TextAlign.start),
               ),
               Container(
@@ -135,21 +144,16 @@ class BookerMainHomeView extends StatelessWidget {
                 height: 650.h,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: 20,
+                  itemCount: controller.bookerHomeData?.services?.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: (){
                         moveUTD(
-                          screen: const BookerServiceSelector(),
+                          // screen: const BookerServiceSelector(),
                         );
                       },
-                      child: ServiceProviderCard(
-                        image: serviceProviderImg,
-                        star: 4.5,
-                        description:
-                            'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
-                        name: 'John Smith',
-                        rate: 30,
+                      child: RecommendedSeriveCard(
+                        recommendedService: controller.bookerHomeData!.services![index],
                       ),
                     );
                   },
@@ -226,10 +230,8 @@ class HeaderTime extends StatelessWidget {
 
 
 class CategoryCircleCard extends StatelessWidget {
-  CategoryCircleCard({super.key, required this.image, required this.name,required this.id});
-  String image;
-  String name;
-  int id;
+  CategoryCircleCard({super.key, required this.category});
+  Categories category;
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +241,10 @@ class CategoryCircleCard extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              moveLTR(screen:  BookerServiceListView(id: id,));
+              moveLTR(screen:  ProvidersListView(
+                id: category.id!,
+                categoryName: category.categoryName!,
+              ));
             },
             child: Container(
               padding: EdgeInsets.all(15.0.h),
@@ -258,7 +263,7 @@ class CategoryCircleCard extends StatelessWidget {
                   height: 40.h,
                   width: 40.h,
                   child: Image.network(
-                    image,
+                    category.categoryImage!,
                     fit: BoxFit.cover,
                   )),
             ),
@@ -267,10 +272,10 @@ class CategoryCircleCard extends StatelessWidget {
             height: 8.h,
           ),
           MainTextWidget(
-              text: name,
+              text: category.categoryName!,
               fontColor: Colors.black,
-              fontSize: 11.sp,
-              fontWeight: FontWeight.w400,
+              fontSize: 10.sp,
+              fontWeight: FontWeight.w500,
               align: TextAlign.center),
         ],
       ),
@@ -295,10 +300,10 @@ class CleanerSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MainTextWidget(
-                    text: 'Hi $name',
+                    text: 'Hi, $name',
                     fontColor: Colors.black,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                     align: TextAlign.start),
                 SizedBox(
                   height: 6.h,
@@ -306,7 +311,7 @@ class CleanerSection extends StatelessWidget {
                 MainTextWidget(
                     text: 'What service do\nyou need?',
                     fontColor: purpleColor,
-                    fontSize: 23.sp,
+                    fontSize: 23,
                     fontWeight: FontWeight.w600,
                     align: TextAlign.start),
               ],
@@ -330,74 +335,81 @@ class CleanerSection extends StatelessWidget {
 }
 
 class RecomendedProviderCard extends StatelessWidget {
-  const RecomendedProviderCard({super.key});
+   RecomendedProviderCard({super.key, required this.recomendedprovider});
+  RecommendedProviders recomendedprovider;
+
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        moveUTD(screen: const BookerSideProviderProfileView());
-      },
-      child: Container(
-        margin: EdgeInsets.all(8.0.h),
-        padding: EdgeInsets.all(10.h),
-        height: 200.h,
-        width: 161.w,
-        decoration: BoxDecoration(
-            color: containerLightBlueClr,
-            borderRadius: BorderRadius.circular(10.0)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 105.h,
-              width: 141.w,
-              child: Image.asset(
-                serviceProviderImg,
-                fit: BoxFit.fill,
+    return Container(
+      margin: EdgeInsets.all(8.0.h),
+      padding: EdgeInsets.all(10.h),
+      height: 200.h,
+      width: 161.w,
+      decoration: BoxDecoration(
+          color: containerLightBlueClr,
+          borderRadius: BorderRadius.circular(10.0)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 105.h,
+            width: 141.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              image: DecorationImage(
+                image: NetworkImage(
+                  recomendedprovider.profileImage!,
+                ),
+                fit: BoxFit.fill
+              )
+            ),
+            // child: Image.network(
+            //   recomendedprovider.profileImage!,
+            //   fit: BoxFit.fitWidth,
+            // ),
+          ),
+          const SizedBox(
+            height: 5.0,
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.star,
+                size: 20.h,
+                color: greenIconClr,
               ),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  size: 20.h,
-                  color: greenIconClr,
-                ),
-                SizedBox(
-                  width: 4.w,
-                ),
-                MainTextWidget(
-                    text: '4.5',
-                    fontColor: textFieldTextColor,
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.w500,
-                    align: TextAlign.start)
-              ],
-            ),
-            SizedBox(
-              height: 4.h,
-            ),
-            MainTextWidget(
-                text: 'Jhon Smith',
-                fontColor: textFieldTextColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                align: TextAlign.start),
-            SizedBox(
-              height: 4.h,
-            ),
-            MainTextWidget(
-                text: 'Starting \$ 30 / Hour',
-                fontColor: purpleColor,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
-                align: TextAlign.start),
-          ],
-        ),
+              SizedBox(
+                width: 4.w,
+              ),
+              MainTextWidget(
+                  text: recomendedprovider.averageRating.toString(),
+                  fontColor: textFieldTextColor,
+                  fontSize: 11.sp,
+                  fontWeight: FontWeight.w500,
+                  align: TextAlign.start)
+            ],
+          ),
+          SizedBox(
+            height: 4.h,
+          ),
+          MainTextWidget(
+              text: '${recomendedprovider.firstName!} ${recomendedprovider.lastName!}',
+              fontColor: textFieldTextColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              align: TextAlign.start),
+          SizedBox(
+            height: 4.h,
+          ),
+          MainTextWidget(
+              //text: 'Starting \$ ${recomendedprovider.perHourPrice} / Hour',
+              text: 'Starting \$ ${recomendedprovider.perHourPrice} / Hour',
+              fontColor: purpleColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              align: TextAlign.start),
+        ],
       ),
     );
   }

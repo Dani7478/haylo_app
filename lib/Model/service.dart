@@ -1,21 +1,54 @@
-class Service {
-  String? id;
-  String? category_name;
-  String? category_image;
+import 'package:haylo_app/Model/providerdetail_model.dart';
 
-  Service({this.id, this.category_name, this.category_image});
+class Services {
+  int? id;
+  int? userId;
+  String? name;
+  String? description;
+  int? perHourPrice;
+  String? priceCurrency;
+  String? image;
+  String? createdAt;
+  ProviderDetails? providerDetails;
 
-  Service.fromJson(Map<String, dynamic> json) {
-    id = json['id'].toString();
-    category_name = json['category_name']?.toString();
-    category_image = json['category_image']?.toString();
+  Services(
+      {this.id,
+        this.userId,
+        this.name,
+        this.description,
+        this.perHourPrice,
+        this.priceCurrency,
+        this.image,
+        this.createdAt,
+        this.providerDetails});
+
+  Services.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    name = json['name'];
+    description = json['description'];
+    perHourPrice = json['per_hour_price'];
+    priceCurrency = json['price_currency'];
+    image = json['image'];
+    createdAt = json['created_at'];
+    providerDetails = json['provider_details'] != null
+        ? new ProviderDetails.fromJson(json['provider_details'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['category_name'] = this.category_name;
-    data['category_image'] = this.category_image;
+    data['user_id'] = this.userId;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['per_hour_price'] = this.perHourPrice;
+    data['price_currency'] = this.priceCurrency;
+    data['image'] = this.image;
+    data['created_at'] = this.createdAt;
+    if (this.providerDetails != null) {
+      data['provider_details'] = this.providerDetails!.toJson();
+    }
     return data;
   }
 }

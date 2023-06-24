@@ -6,9 +6,7 @@ import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
-
 import '../../../Constants/images.dart';
-import 'addpayment_form_view.dart';
 
 class BookServiceFormView extends StatelessWidget {
   const BookServiceFormView({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class BookServiceFormView extends StatelessWidget {
               MainTextWidget(
                   text: 'Create Account',
                   fontColor: Colors.black,
-                  fontSize: 24.sp,
+                  fontSize: 24,
                   fontWeight: FontWeight.w600,
                   align: TextAlign.start),
 
@@ -57,14 +55,14 @@ class BookServiceFormView extends StatelessWidget {
               ),
 
               SizedBox(
-                height: 5.h,
+                height: 10.65.h,
               ),
 
               MainTextWidget(
                   text: 'Upload Photo',
                   fontColor: const Color(0xFF373737),
                   fontSize: 13.sp,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w600,
                   align: TextAlign.center),
 
               //__________________________FIRST NAME CTRL
@@ -91,7 +89,7 @@ class BookServiceFormView extends StatelessWidget {
               ),
               CustomTextField(
                 controller: controller.lastNameCtrl,
-                hintText: 'Enter Last Name',
+                hintText: 'Enter You Last Name',
                 abscr: false,
                 error: 'Enter Something',
                 pattern: nameRegix,
@@ -134,20 +132,23 @@ class BookServiceFormView extends StatelessWidget {
               GetBuilder<BookProfileFormController>(
                 init: BookProfileFormController(),
                 builder: (controller) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                              value: controller.isTermsOk,
-                              onChanged: (value) {
-                                controller.changedIsTermsOk();
-                              }),
-                          CommonText(text: 'I Agree to the term & onditions'),
-                        ],
-                      ),
-                    ],
+                  return Container(
+                    transform:  Matrix4.translationValues(-9,0,0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                                value: controller.isTermsOk,
+                                onChanged: (value) {
+                                  controller.changedIsTermsOk();
+                                }),
+                            CommonText(text: 'I Agree To The Terms And Conditions'),
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -168,7 +169,7 @@ class BookServiceFormView extends StatelessWidget {
               const SocialSection(),
               CommonBottomSings(
                   firsttext: 'Already have an account',
-                  lasttext: 'SignIn',
+                  lasttext: 'Sign In',
                   navigate: const LoginView()),
             ],
           ),

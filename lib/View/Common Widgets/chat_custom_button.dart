@@ -45,7 +45,7 @@ class ChatCustomButton extends StatelessWidget {
               style: GoogleFonts.poppins(
                   fontSize: 15.h,
                   color: blackTextColor,
-                  fontWeight: FontWeight.w400),
+                  fontWeight: FontWeight.bold),
             ),
             ],)
           ),

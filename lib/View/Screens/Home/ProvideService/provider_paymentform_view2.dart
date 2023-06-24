@@ -57,11 +57,15 @@ class ProviderPaymentFormView2 extends StatelessWidget {
               //_____________________PROFILE IMAGE
 
               const MainForm(),
-              CustomButton2(
-                  name: 'Next',
-                  task: () {
-                   controller.goNext();
-                  }),
+              GetBuilder<ProviderPaymentFormController2>(
+                builder: (controller) {
+                  return controller.isLoading==false ? CustomButton2(
+                      name: 'Next',
+                      task: () {
+                       controller.goNext();
+                      }) : const CustomLoadingButton();
+                }
+              ),
               SizedBox(
                 height: 40.h,
               ),
@@ -180,7 +184,7 @@ class MainForm extends StatelessWidget {
               hintText: 'DD/MM/YY',
               abscr: false,
                error: 'Enter Something',
-                  pattern: dateRegix,
+                  pattern: nameRegix,
               ),
           SizedBox(
             height: 20.h,

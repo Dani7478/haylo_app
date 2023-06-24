@@ -10,55 +10,77 @@ import '../../../../Services/local_storage.dart';
 import '../../../api.dart';
 
 class ProviderMainHomeController extends GetxController {
-  String bookingtype = 'ongoing';
+  String bookingType = 'ongoing';
   String date = 'Loading';
-  List<Booking> bookingList=[];
+  List<Booking> bookingList = [];
+  List<Booking> historyBooking=[];
+  bool dataLoading = true;
 
   @override
   void onInit() {
+    gettingAllData();
     super.onInit();
-    getCurrentFormattedDate();
-    getAllBookingDeatail();
+  }
+
+ Future<void> refreshData() async {
+    dataLoading = true;
+    update();
+     gettingAllData();
+    dataLoading = false;
+    update();
+  }
+
+  gettingAllData() async {
+    await getCurrentFormattedDate();
+    await getAllBookingDeatail();
   }
 
   changeBooking({String? bookingtype}) {
-    this.bookingtype = bookingtype!;
+    bookingType = bookingtype!;
     print('____________${bookingtype}');
     update();
   }
 
   //____________________________get current date
-   getCurrentFormattedDate() {
+  getCurrentFormattedDate() {
     DateTime now = DateTime.now();
     DateFormat formatter = DateFormat('EEEE dd MMMM yyyy');
     date = formatter.format(now);
+    print('DATE ${date}');
     update();
   }
 
-
   getAllBookingDeatail() async {
-    var data={
-      'action':'view'
-    };
-    var response= await ApiService().postApiWithToken(data, getProviderBookingUrl);
-
-    var jsonData=json.decode(response);
-
-    try{
-      if(jsonData['status']==true){
-        var list=jsonData['data']['upcoming_bookings']['data'];
-
-        for(int i=0; i<list.length; i++) {
-         Booking book= Booking.fromJson(list[i]);
-         bookingList.add(book);
+    bookingList.clear();
+    historyBooking.clear();
+    var data = {'action': 'view'};
+    var response =
+        await ApiService().postApiWithToken(data, getProviderBookingUrl);
+    var jsonData = json.decode(response);
+    try {
+      if (jsonData['status'] == true) {
+        var list = jsonData['data']['upcoming_bookings'];
+        var list2 = jsonData['data']['history'];
+        for (int i = 0; i < list.length; i++) {
+          Booking book = Booking.fromJson(list[i]);
+          bookingList.add(book);
         }
-        print('list of booking: ${bookingList.length}');
-      }else {
+        for(int i=0; i<list2.length ;i++){
+          Booking book = Booking.fromJson(list2[i]);
+          historyBooking.add(book);
+        }
+        dataLoading = false;
+        update();
+      } else {
         customToast(jsonData['message']);
+        dataLoading = false;
+        update();
       }
-    }catch(error){
+    } catch (error) {
       customToast('Something went Wrong');
     }
 
   }
+
+
 }

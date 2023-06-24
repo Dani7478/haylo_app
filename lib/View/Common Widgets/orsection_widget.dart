@@ -16,17 +16,17 @@ class OrSection extends StatelessWidget {
       child: Row(
         children: [
           const Expanded(
-            flex: 30,
+            flex: 35,
             child: Divider(
               color: grayColor,
               thickness: 2,
             ),
           ),
           Expanded(
-              flex: 40,
+              flex: 30,
               child: Center(child: CommonText(text: text!))),
           const Expanded(
-            flex: 30,
+            flex: 35,
             child: Divider(
               color: grayColor,
               thickness: 2,

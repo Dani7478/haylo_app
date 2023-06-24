@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/View/Screens/Home/ProvideService/provider_edit_services.dart';
+import 'package:haylo_app/test.dart';
 import 'Controller/Home/ProvideService/provideraddnewservice_controller.dart';
 import 'Controller/bindings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'View/Screens/Authentication/login_view.dart';
+import 'View/Screens/Home/BookService/addpayment_form_view.dart';
 import 'View/Screens/Home/ProvideService/provider_addnewservice_view.dart';
 import 'View/Screens/Home/splash_screen.dart';
+import 'View/Screens/Universal/all_done_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +40,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           initialBinding: AllBindings(),
           routes: {
-            '/': (context) =>  const SplashScreen()
+            '/': (context) =>   const SplashScreen()
             //'/Login': (context) => const LoginView(),
           },
         );

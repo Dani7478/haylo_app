@@ -41,10 +41,10 @@ class PaymentDoneView extends StatelessWidget {
               height: 10.h,
             ),
                   MainTextWidget(
-                      text: 'Your payment method added \n successfully.',
+                      text: 'Your payment method added \n \n successfully.',
                       fontColor: Colors.black,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w300,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w400,
                       align: TextAlign.center),
                 ],
               ),
@@ -53,7 +53,7 @@ class PaymentDoneView extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 25.h),
             child: CustomButton2(
-              name: 'Go to Home',
+              name: 'Go To Home',
               task: () {
                 moveUTD(screen: whichWidget());
               },

@@ -31,6 +31,7 @@ class CustomFieldWithBottomBorder extends StatelessWidget {
               fontWeight: FontWeight.w400,
               align: TextAlign.left),
           Container(
+            height: 35,
             decoration:const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
@@ -47,11 +48,11 @@ class CustomFieldWithBottomBorder extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hint,
                 hintStyle: GoogleFonts.poppins(
-                    fontSize: 14.sp,
+                    fontSize: 15.sp,
                     color: const Color(0xFF1D2226),
-                    fontWeight: FontWeight.w400),
+                    fontWeight: FontWeight.w500),
                 //contentPadding: EdgeInsets.zero,
-                  contentPadding: const EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.only(top: 7.0),
                 border: InputBorder.none,
                 suffixIcon: Icon(endicon,size: 25.h,),
 

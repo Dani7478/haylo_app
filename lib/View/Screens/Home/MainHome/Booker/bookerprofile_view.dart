@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/Controller/Home/MainHome/Booker/booker_profile_controller.dart';
+import 'package:haylo_app/Services/local_storage.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
-import 'package:haylo_app/View/Common%20Widgets/message_dialogue.dart';
 import 'package:haylo_app/View/Common%20Widgets/navigate.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import 'package:haylo_app/View/Screens/Universal/notification_listview.dart';
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_payment_updateview.dart';
-
 import '../../../../Common Widgets/widgets_links.dart';
 import '../../../../Constants/images.dart';
 import '../../../../Constants/regix.dart';
+import 'booker_bookings_listview.dart';
 
 class BookerProfileView extends StatelessWidget {
   const BookerProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller=Get.put(BookerProfileController());
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -30,7 +32,11 @@ class BookerProfileView extends StatelessWidget {
                 SizedBox(
                   height: 50.h,
                 ),
-                Image.asset(profileImage),
+                GestureDetector(
+                  onTap: (){
+                    LocalStorage().getToken();
+                  },
+                    child: Image.asset(profileImage)),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -63,7 +69,9 @@ class BookerProfileView extends StatelessWidget {
                   profileItemCard(
                       icon: Icons.note_alt_outlined,
                       name: 'My Booking',
-                      task: () {}),
+                      task: () {
+                        moveUTD(screen: const BookerBookingListView() );
+                      }),
                   profileItemCard(
                       icon: Icons.payment_rounded,
                       name: 'Payment Method',
@@ -88,7 +96,7 @@ class BookerProfileView extends StatelessWidget {
                       icon: Icons.logout,
                       name: 'Sign Out',
                       task: () {
-                        moveUTD(screen: const LoginView());
+                        controller.logoutUser();
                       }),
                 ],
               ),
@@ -114,16 +122,16 @@ class BookerProfileView extends StatelessWidget {
           ),
           title: MainTextWidget(
             text: name!,
-            fontSize: 14.sp,
+            fontSize: 15,
             fontWeight: FontWeight.w400,
             fontColor: Colors.black,
             align: TextAlign.start,
           ),
-          trailing: const Icon(
+          trailing: name!='Sign Out' ? const Icon(
             Icons.arrow_forward_ios_rounded,
             color: Colors.black,
             size: 20,
-          ),
+          ) : const SizedBox(),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
+import 'package:haylo_app/View/Constants/colors.dart';
 
 import '../Screens/Home/signup_selection.dart';
 
@@ -22,10 +23,10 @@ class CommonBottomSings extends StatelessWidget {
          Text(
           firsttext!,
           style: const TextStyle(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.w200),
+              color: purpleColor, fontSize: 16, fontWeight: FontWeight.w400),
         ),
         const SizedBox(
-          width: 8,
+          width: 0,
         ),
         TextButton(
             onPressed: () {
@@ -36,7 +37,7 @@ class CommonBottomSings extends StatelessWidget {
               style:  const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.bold),
             ))
       ],
     );

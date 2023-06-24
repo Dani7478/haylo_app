@@ -6,8 +6,6 @@ import 'package:haylo_app/Controller/controller_links.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
-import 'package:haylo_app/View/Screens/Home/ProvideService/provide_category_formview.dart';
-import '../../../Constants/images.dart';
 
 class ProvideServiceFormView extends StatelessWidget {
   const ProvideServiceFormView({Key? key}) : super(key: key);
@@ -62,14 +60,14 @@ class ProvideServiceFormView extends StatelessWidget {
                 );
               }),
               SizedBox(
-                height: 5.h,
+                height: 10.h,
               ),
 
               MainTextWidget(
                   text: 'Upload Photo',
-                  fontColor: const Color(0xFF373737),
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w300,
+                  fontColor: blackTextColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
                   align: TextAlign.center),
 
               //__________________________FIRST NAME CTRL
@@ -96,7 +94,7 @@ class ProvideServiceFormView extends StatelessWidget {
               ),
               CustomTextField(
                   controller: controller.lastNameCtrl,
-                  hintText: 'Enter Last Name',
+                  hintText: 'Enter Your Last Name',
                   abscr: false,
                   error: 'field must be filled',
                   pattern: nameRegix,
@@ -151,7 +149,7 @@ class ProvideServiceFormView extends StatelessWidget {
                               onChanged: (value) {
                                 controller.changeIsTerm();
                               }),
-                          CommonText(text: 'I Agree to the term & onditions'),
+                          CommonText(text: 'I Agree to the term & Conditions'),
                         ],
                       ),
                     ],
@@ -170,12 +168,12 @@ class ProvideServiceFormView extends StatelessWidget {
                 height: 8.h,
               ),
               OrSection(
-                text: 'or sign Up with',
+                text: 'Or sign Up with',
               ),
               const SocialSection(),
               CommonBottomSings(
-                  firsttext: 'Already have an account',
-                  lasttext: 'SignIn',
+                  firsttext: 'Already have an account?',
+                  lasttext: 'Sign In',
                   navigate: const LoginView()),
             ],
           );

@@ -17,4 +17,6 @@ export 'Home/MainHome/Provider/provider_mainhome_controller.dart';
 export 'Home/MainHome/Provider/providerprofile_controller.dart';
 export 'Home/MainHome/Booker/booker_mainhome_controller.dart';
 export 'Home/MainHome/Booker/bookerservice_controller.dart';
-
+export 'Home/MainHome/Booker/uniqueprovider_list_controller.dart';
+export 'Home/MainHome/Booker/bookerservice_select_controller.dart';
+export 'Chat/chat_controller.dart';

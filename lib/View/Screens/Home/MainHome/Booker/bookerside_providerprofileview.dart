@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:haylo_app/Model/uniquecategory_model.dart';
 import 'package:haylo_app/Model/user_service.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
@@ -9,14 +10,16 @@ import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_service_selec
 import '../../../../Constants/images.dart';
 
 class BookerSideProviderProfileView extends StatelessWidget {
-  const BookerSideProviderProfileView({super.key});
+  BookerSideProviderProfileView({super.key, required this.providerData});
+
+  UniqueCategoryModel providerData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
-          const TopProfileHeader(),
+          TopProfileHeader(userdata: providerData),
           Container(
             //   width: double.infinity,
             height: 500.h,
@@ -46,7 +49,7 @@ class BookerSideProviderProfileView extends StatelessWidget {
                 MainTextWidget(
                     text: 'About Me',
                     fontColor: blackTextColor,
-                    fontSize: 15.sp,
+                    fontSize: 15,
                     fontWeight: FontWeight.w600,
                     align: TextAlign.start),
                 SizedBox(
@@ -54,25 +57,27 @@ class BookerSideProviderProfileView extends StatelessWidget {
                 ),
                 MainTextWidget(
                     text:
-                        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore',
-                    fontColor: grayColor,
-                    fontSize: 10.sp,
+                        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.',
+                    fontColor: blackTextColor,
+                    fontSize: 12,
                     fontWeight: FontWeight.w300,
                     align: TextAlign.justify),
                 SizedBox(
                   height: 300.h,
                   child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: providerData.services?.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             moveLTR(
-                              screen: const BookerServiceSelector()
-                            );
+                                screen: BookerServiceSelector(
+                              category: providerData,
+                              service: providerData.services![index],
+                            ));
                           },
                           child: ServiceRateCard(
                             role: 'user',
-                            service: new UserService(),
+                            service: providerData.services![index],
                           ),
                         );
                       }),
@@ -87,7 +92,9 @@ class BookerSideProviderProfileView extends StatelessWidget {
 }
 
 class TopProfileHeader extends StatelessWidget {
-  const TopProfileHeader({super.key});
+  TopProfileHeader({super.key, required this.userdata});
+
+  UniqueCategoryModel userdata;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +112,7 @@ class TopProfileHeader extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 25.h),
         child: Column(
           children: [
-            const BackMoveAppBar(),
+            BackMoveAppBarWithTitle2(titleName: ''),
             SizedBox(
               height: 50.h,
             ),
@@ -148,7 +155,7 @@ class TopProfileHeader extends StatelessWidget {
                               width: 8.w,
                             ),
                             MainTextWidget(
-                                text: '4.5',
+                                text: userdata.averageRating.toString(),
                                 fontColor: blackTextColor,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w600,
@@ -161,9 +168,9 @@ class TopProfileHeader extends StatelessWidget {
                       height: 7.h,
                     ),
                     MainTextWidget(
-                        text: 'Jhon Smith',
+                        text: '${userdata.firstName!} ${userdata.lastName!}',
                         fontColor: textFieldTextColor,
-                        fontSize: 14.sp,
+                        fontSize: 22,
                         fontWeight: FontWeight.w600,
                         align: TextAlign.start),
                     SizedBox(
@@ -172,10 +179,9 @@ class TopProfileHeader extends StatelessWidget {
                     SizedBox(
                       width: 200,
                       child: MainTextWidget(
-                          text:
-                              'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing',
-                          fontColor: grayColor,
-                          fontSize: 10.sp,
+                          text: userdata.uniqueSkills!,
+                          fontColor: descriptionTextColor,
+                          fontSize: 10,
                           fontWeight: FontWeight.w300,
                           align: TextAlign.start),
                     ),
@@ -187,8 +193,8 @@ class TopProfileHeader extends StatelessWidget {
                   decoration: BoxDecoration(
                       border:
                           Border.all(color: containerLightBlueClr, width: 3)),
-                  child: Image.asset(
-                    serviceProviderImg,
+                  child: Image.network(
+                    userdata.profileImage!,
                     fit: BoxFit.cover,
                   ),
                 )

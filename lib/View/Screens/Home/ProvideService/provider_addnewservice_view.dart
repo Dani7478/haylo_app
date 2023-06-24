@@ -2,7 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:haylo_app/View/Common%20Widgets/backmove_appbar.dart';
+import 'package:haylo_app/View/Common%20Widgets/backmover_circular.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 
@@ -101,6 +101,7 @@ class ProviderAddNewServiceView extends StatelessWidget {
     var controller = Get.put(ProviderAddNewServiceController());
 
     Get.defaultDialog(
+
       title: '',
       content: Container(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -244,7 +245,6 @@ class ProviderAddNewServiceView extends StatelessWidget {
         ),
       ),
       barrierDismissible: false,
-      //insetPadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
     );
   }

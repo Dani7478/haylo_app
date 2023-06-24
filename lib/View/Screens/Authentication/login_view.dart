@@ -39,12 +39,12 @@ class LoginView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
+                   Text(
                     'Hi, Welcome Back !',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: Colors.black,
-                      fontSize: screenWidth * 0.07,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(
@@ -53,14 +53,18 @@ class LoginView extends StatelessWidget {
                       child: Image.asset(loginHandImg)),
                 ],
               ),
-              const Text(
-                "Hello, you've been missed!",
-                style: TextStyle(
-                  color: Color(0xFF373737),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
+               Container(
+                 // margin: const EdgeInsets.only(bottom: -5),
+                 transform: Matrix4.translationValues(0, -20, 0),
+                 child: Text(
+                   "Hello, you've been missed!",
+                   style: GoogleFonts.poppins(
+                     color: Color(0xFF373737),
+                     fontSize: 13,
+                     fontWeight: FontWeight.w300,
+                   ),
+                 ),
+               ),
               SizedBox(
                 height: 20.h,
               ),
@@ -71,7 +75,7 @@ class LoginView extends StatelessWidget {
               ),
               CustomTextField(
                   controller: Get.find<LoginController>().emailCtrl,
-                  hintText: 'Enter Your, Email',
+                  hintText: 'Enter Your Email',
                   abscr: false,
                   error: 'Enter Valid Email',
                   pattern: emailRegix,
@@ -103,33 +107,36 @@ class LoginView extends StatelessWidget {
               GetBuilder<LoginController>(
                 init: LoginController(),
                 builder: (controller) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                              value: controller.isremember,
-                              onChanged: (value) {
-                                controller.changeIsRemember();
-                                
-                              }),
-                          CommonText(text: 'Remember Me'),
-                        ],
-                      ),
-                      InkWell(
-                        onTap: () {
-                          moveRTL(screen: const ForgotPasswordView());
-                        },
-                        child: Text(
-                          'Forgot Password?',
-                          style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: const Color(0xFFD40000),
-                              fontWeight: FontWeight.w500),
+                  return Container(
+                    transform:  Matrix4.translationValues(-8,0,0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                                value: controller.isremember,
+                                onChanged: (value) {
+                                  controller.changeIsRemember();
+
+                                }),
+                            CommonText(text: 'Remember Me'),
+                          ],
                         ),
-                      ),
-                    ],
+                        InkWell(
+                          onTap: () {
+                            moveRTL(screen: const ForgotPasswordView());
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                color: const Color(0xFFD40000),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -151,16 +158,16 @@ class LoginView extends StatelessWidget {
                 height: 40.h,
               ),
               OrSection(
-                text: 'or login with',
+                text: 'Or Login With',
               ),
               SizedBox(
                 height: 8.h,
               ),
               const SocialSection(),
               SizedBox(
-                height: 100.h,
+                height: 45.h,
               ),
-
+              // Spacer(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -170,14 +177,14 @@ class LoginView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Don't Have an Account?",
+                          "Dont have an account?",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: purpleColor,
                               fontSize: 16,
-                              fontWeight: FontWeight.w200),
+                              fontWeight: FontWeight.w300),
                         ),
                         const SizedBox(
-                          width: 8,
+                          width: 0,
                         ),
                         TextButton(
                             onPressed: () {
@@ -188,7 +195,7 @@ class LoginView extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.bold),
                             ))
                       ],
                     ),

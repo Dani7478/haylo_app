@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:haylo_app/Controller/Home/MainHome/Booker/booker_search_controller.dart';
+import 'package:haylo_app/Services/local_storage.dart';
 import 'package:haylo_app/View/Common%20Widgets/main_text.dart';
 import 'package:haylo_app/View/Constants/consts.dart';
 import 'package:haylo_app/View/Constants/styles.dart';
@@ -78,12 +79,14 @@ class BookerSearchView extends StatelessWidget {
 
   suggetionCard(String service) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async {
         // Get.to(
         //   const BookerServiceListView(),
         //   transition: Transition.upToDown,
         //   duration: const Duration(milliseconds:400 ),
         // );
+        // int type=await LocalStorage().isUserSaved();
+        // print('Type of User: $type');
       },
       child: Container(
         margin: EdgeInsets.all(5.h),
@@ -154,7 +157,7 @@ class SearchBar extends StatelessWidget {
                 child: TextField(
                   controller: controller.searchCtrl,
                   decoration: InputDecoration(
-                    hintText: 'What are you Looking',
+                    hintText: 'What are you looking for?',
                     hintStyle: CustomTextStyles().hinttextstyle,
                     border: InputBorder.none,
                     alignLabelWithHint: true,

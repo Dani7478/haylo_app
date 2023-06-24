@@ -6,6 +6,7 @@ import 'package:haylo_app/Controller/toast.dart';
 import 'package:haylo_app/Services/api_service.dart';
 import 'package:haylo_app/Services/local_storage.dart';
 
+import '../../../Model/service.dart';
 import '../../../Model/user_service.dart';
 import '../../../View/Constants/images.dart';
 import '../../api.dart';
@@ -15,7 +16,7 @@ class ProviderAddNewServiceController extends GetxController {
   TextEditingController serviceDescriptionCtrl = TextEditingController();
   TextEditingController servicePriceCtrl = TextEditingController();
   bool loadingData = true;
-  List<UserService> serviceList = [];
+  List<Services> serviceList = [];
 
   @override
   void onInit() {
@@ -23,20 +24,20 @@ class ProviderAddNewServiceController extends GetxController {
     getAllProviderService();
   }
 
-  fillData(UserService service) {
+  fillData(Services service) {
     serviceNameCtrl.text = service.name!;
     serviceDescriptionCtrl.text = service.description!;
-    servicePriceCtrl.text = service.perHourPrice!;
+    servicePriceCtrl.text = service.perHourPrice.toString();
     update();
   }
 
-  updateService(UserService service) async {
+  updateService(Services service) async {
     var data = {
       'action': 'edit',
       'name': serviceNameCtrl.text,
       'description': serviceDescriptionCtrl.text,
       'per_hour_price': servicePriceCtrl.text,
-      'service_id': service.id
+      'service_id': service.id.toString()
       // 'image':
       // 'service_id'
     };
@@ -77,7 +78,7 @@ class ProviderAddNewServiceController extends GetxController {
     var jsonData = json.decode(response);
  print(jsonData['data']['data']);
     for (int i = 0; i < jsonData['data']['data'].length; i++) {
-       UserService service = UserService.fromJson(jsonData['data']['data'][i]);
+       Services service = Services.fromJson(jsonData['data']['data'][i]);
       serviceList.add(service);
       update();
 
@@ -86,7 +87,7 @@ class ProviderAddNewServiceController extends GetxController {
     update();
   }
 
-  deleteService(UserService service) async {
+  deleteService(Services service) async {
     var data = {
       'action': 'delete',
       'service_id': service.id!,

@@ -11,13 +11,26 @@ import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_serachview.da
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerprofile_view.dart';
 import 'package:haylo_app/View/Screens/Universal/notification_listview.dart';
 
-class ProviderHomeView extends StatelessWidget {
+class ProviderHomeView extends StatefulWidget {
   const ProviderHomeView({Key? key}) : super(key: key);
 
   @override
+  State<ProviderHomeView> createState() => _ProviderHomeViewState();
+}
+
+class _ProviderHomeViewState extends State<ProviderHomeView> {
+  var controller = Get.put(ProviderAppBarController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var controller = Get.put(ProviderAppBarController());
+
     return Scaffold(
+      backgroundColor: whiteColor,
       body: GetBuilder<ProviderAppBarController>(builder: (controller) {
         if (controller.activeView == 'profile') {
           return const ProviderProfileView();
@@ -44,6 +57,7 @@ class BookerBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProviderAppBarController());
+
     return GetBuilder<ProviderAppBarController>(builder: (controller) {
       return Container(
         width: double.infinity,
@@ -56,19 +70,19 @@ class BookerBottomNavBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               bottomBarIcon(
-                  icon: Icons.home,
+                  icon: Icons.home_outlined,
                   text: 'Home',
                   activeView: controller.activeView),
               bottomBarIcon(
-                  icon: Icons.chat,
+                  icon: Icons.message_outlined,
                   text: 'Chat',
                   activeView: controller.activeView),
               bottomBarIcon(
-                  icon: Icons.notifications,
+                  icon: Icons.notifications_outlined,
                   text: 'Notification',
                   activeView: controller.activeView),
               bottomBarIcon(
-                  icon: Icons.person,
+                  icon: Icons.person_2_outlined,
                   text: 'Profile',
                   activeView: controller.activeView),
             ],
@@ -81,9 +95,8 @@ class BookerBottomNavBar extends StatelessWidget {
   bottomBarIcon({IconData? icon, String? text, String? activeView}) {
     late Color whichColor;
     Color activeColor = purpleColor;
-    Color inactiveColor = Color(0xFFB1B1B1);
+    Color inactiveColor = const Color(0xFFB1B1B1);
     if (text?.toLowerCase() == activeView?.toLowerCase()) {
-      print('Calling');
       whichColor = purpleColor;
     } else {
       whichColor = inactiveColor;
@@ -97,7 +110,7 @@ class BookerBottomNavBar extends StatelessWidget {
           Icon(
             icon,
             color: whichColor,
-            size: 30.h,
+            size: 25.h,
           ),
           SizedBox(
             height: 5.h,

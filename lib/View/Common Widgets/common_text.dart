@@ -11,9 +11,9 @@ class CommonText extends StatelessWidget {
     return Text(
       text,
       style:  GoogleFonts.poppins(
-        fontSize: 12.sp,
+        fontSize: 14.sp,
         color: Colors.black,
-        fontWeight: FontWeight.w500
+        fontWeight: FontWeight.bold
 
       ),
     );

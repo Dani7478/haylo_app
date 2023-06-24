@@ -36,8 +36,8 @@ class MainHomeTopAppBar extends StatelessWidget {
                 MainTextWidget(
                     text: 'Haylo',
                     fontColor: Colors.black,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                     align: TextAlign.start),
                 SizedBox(
                   height: 3.h,
@@ -45,8 +45,8 @@ class MainHomeTopAppBar extends StatelessWidget {
                 MainTextWidget(
                     text: controller.date,
                     fontColor: grayColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w300,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
                     align: TextAlign.start),
               ],
             );
@@ -55,14 +55,15 @@ class MainHomeTopAppBar extends StatelessWidget {
             height: 50.h,
             width: 50.h,
             decoration: BoxDecoration(
-                color: whiteColor,
+                color: containerLightBlueClr,
                 borderRadius: BorderRadius.circular(8.0),
-                boxShadow: [
-                  BoxShadow(
-                      color: containerShadowClr,
-                      blurRadius: 6.0.sp,
-                      offset: const Offset(0, 0))
-                ]),
+                // boxShadow: [
+                //   BoxShadow(
+                //       color: containerShadowClr,
+                //       blurRadius: 6.0.sp,
+                //       offset: const Offset(0, 0))
+                // ]
+            ),
             child: GestureDetector(
               onTap: () {
                 moveUTD(
@@ -72,7 +73,7 @@ class MainHomeTopAppBar extends StatelessWidget {
               },
               child: const Center(
                 child: Icon(
-                  Icons.notifications,
+                  Icons.notifications_outlined,
                   color: purpleColor,
                   size: 30,
                 ),

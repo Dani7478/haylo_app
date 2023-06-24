@@ -124,7 +124,7 @@ class ProviderProfileView extends StatelessWidget {
             fontColor: Colors.black,
             align: TextAlign.start,
           ),
-          trailing: const Icon(
+          trailing:name=='Sign Out' ? const SizedBox():  const Icon(
             Icons.arrow_forward_ios_rounded,
             color: Colors.black,
             size: 20,

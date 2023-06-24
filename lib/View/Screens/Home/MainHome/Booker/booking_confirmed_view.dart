@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Constants/colors.dart';
 import 'package:haylo_app/View/Constants/images.dart';
@@ -7,11 +8,29 @@ import 'package:haylo_app/View/Screens/Home/MainHome/Booker/booker_main_homeview
 import 'package:haylo_app/View/Screens/Home/MainHome/Booker/bookerhome_view.dart';
 import 'package:haylo_app/View/Screens/Universal/chatting_view.dart';
 
+import '../../../../../Controller/Home/MainHome/Booker/booker_confirmed_controller.dart';
+import '../../../../../Model/service.dart';
+import '../../../../../Model/uniquecategory_model.dart';
+
 class BookerBookingConfirmed extends StatelessWidget {
-  const BookerBookingConfirmed({super.key});
+  BookerBookingConfirmed({
+    super.key,
+    required this.service,
+    required this.provider,
+    required this.date,
+    required this.time,
+    required this.immediately,
+  });
+
+  UniqueCategoryModel provider;
+  Services service;
+  String date;
+  String time;
+  bool immediately;
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(BookerBookingConfirmConfirmed());
     return Scaffold(
       bottomNavigationBar: Container(
         color: Colors.white,
@@ -25,17 +44,19 @@ class BookerBookingConfirmed extends StatelessWidget {
               child: ChatCustomButton(
                   name: 'Chat with Provider',
                   task: () {
-                    moveUTD(screen: const ChatttingView());
+                    moveUTD(screen:  ChatttingView());
                   }),
             ),
-            SizedBox(height: 15.h,),
-
-             Container(
+            SizedBox(
+              height: 15.h,
+            ),
+            Container(
               color: Colors.white,
               child: CustomButton2(
-                  name: 'Book to Home',
+                  name: 'Back to Home',
                   task: () {
-                    moveUTD(screen: const BookerHomeView());
+                    controller.submitData(service, provider, date, time,immediately);
+                    //  moveUTD(screen: const BookerHomeView());
                   }),
             ),
           ],
@@ -43,7 +64,7 @@ class BookerBookingConfirmed extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 65.h),
+          SizedBox(height: 70.h),
           SizedBox(
             width: double.infinity,
             height: 25.h,
@@ -51,8 +72,11 @@ class BookerBookingConfirmed extends StatelessWidget {
                 text: 'Booking Confirmed',
                 fontColor: Colors.black,
                 fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
                 align: TextAlign.center),
+          ),
+          SizedBox(
+            height: 20.h,
           ),
           Expanded(
             child: Container(
@@ -66,8 +90,8 @@ class BookerBookingConfirmed extends StatelessWidget {
                           color: containerShadowClr)
                     ],
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0),
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
                     )),
                 child: Column(
                   children: [
@@ -109,7 +133,7 @@ class BookerBookingConfirmed extends StatelessWidget {
                         text: 'Thank you for Confirm the Booking',
                         fontColor: Colors.black,
                         fontSize: 15.sp,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                         align: TextAlign.center),
 
                     SizedBox(
@@ -120,17 +144,17 @@ class BookerBookingConfirmed extends StatelessWidget {
                         text:
                             'Please Find Below Important Details \nOf Your Booking.',
                         fontColor: Colors.black,
-                        fontSize: 12.sp,
+                        fontSize: 12,
                         fontWeight: FontWeight.w300,
                         align: TextAlign.center),
 
                     ServiceDetailCard(
-                        name: 'Jhon Smith',
-                        serviceName: 'Electrician',
-                        date: '28 May 2020',
-                        time: '08:59 AM'),
+                        name: '${provider.firstName} ${provider.lastName}',
+                        serviceName: service.name!,
+                        date: date,
+                        time: time),
 
-                    ServicePriceCard(rate: 60),
+                    ServicePriceCard(rate: service.perHourPrice!),
                   ],
                 )),
           ),
@@ -142,12 +166,13 @@ class BookerBookingConfirmed extends StatelessWidget {
 
 class ServicePriceCard extends StatelessWidget {
   ServicePriceCard({super.key, required this.rate});
+
   int rate;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 25.w,right:25.w, top: 10.h),
+      padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 5.h),
       child: Card(
         color: lightGrayContainerClr,
         child: Padding(
@@ -159,7 +184,7 @@ class ServicePriceCard extends StatelessWidget {
                   text: 'Service Price',
                   fontColor: Colors.black,
                   fontSize: 15.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   align: TextAlign.center),
               MainTextWidget(
                   text: '\$ $rate / Hr',
@@ -182,6 +207,7 @@ class ServiceDetailCard extends StatelessWidget {
       required this.serviceName,
       required this.date,
       required this.time});
+
   String name;
   String serviceName;
   String date;
@@ -189,18 +215,19 @@ class ServiceDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Error month short................
     return Padding(
-      padding: EdgeInsets.only(left: 25.w,right:25.w, top: 15.h),
+      padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 15.h),
       child: Card(
         color: lightGrayContainerClr,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(children: [
             MainTextWidget(
-                text: 'Service Card',
+                text: 'Service Details',
                 fontColor: Colors.black,
                 fontSize: 17.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
                 align: TextAlign.center),
             SizedBox(
               height: 20.h,

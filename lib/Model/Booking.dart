@@ -1,3 +1,6 @@
+import 'package:haylo_app/Model/service_detail.dart';
+import 'package:haylo_app/Model/userdetail_model.dart';
+
 class Booking {
   int? id;
   int? userId;
@@ -15,6 +18,8 @@ class Booking {
   String? receiptUrl;
   String? createdAt;
   String? updatedAt;
+  int? immediatly;
+  String? startedAt;
   UserDetails? userDetails;
   UserDetails? providerDetails;
   ServiceDetails? serviceDetails;
@@ -38,7 +43,10 @@ class Booking {
         this.updatedAt,
         this.userDetails,
         this.providerDetails,
-        this.serviceDetails});
+        this.serviceDetails,
+        this.immediatly,
+        this.startedAt
+      });
 
   Booking.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -57,6 +65,8 @@ class Booking {
     receiptUrl = json['receipt_url'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    immediatly=json['immediatly'];
+    startedAt=json['started_at'];
     userDetails = json['user_details'] != null
         ? new UserDetails.fromJson(json['user_details'])
         : null;
@@ -86,6 +96,8 @@ class Booking {
     data['receipt_url'] = this.receiptUrl;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['immediatly']=this.immediatly;
+    data['started_at']=this.startedAt;
     if (this.userDetails != null) {
       data['user_details'] = this.userDetails!.toJson();
     }
@@ -99,84 +111,6 @@ class Booking {
   }
 }
 
-class UserDetails {
-  int? id;
-  String? firstName;
-  String? lastName;
-  String? profileImage;
-  int? averageRating;
-  int? type;
 
-  UserDetails(
-      {this.id,
-        this.firstName,
-        this.lastName,
-        this.profileImage,
-        this.averageRating,
-        this.type});
 
-  UserDetails.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    profileImage = json['profile_image'];
-    averageRating = json['average_rating'];
-    type = json['type'];
-  }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['profile_image'] = this.profileImage;
-    data['average_rating'] = this.averageRating;
-    data['type'] = this.type;
-    return data;
-  }
-}
-
-class ServiceDetails {
-  int? id;
-  int? userId;
-  String? name;
-  String? description;
-  int? perHourPrice;
-  String? priceCurrency;
-  String? image;
-  String? createdAt;
-
-  ServiceDetails(
-      {this.id,
-        this.userId,
-        this.name,
-        this.description,
-        this.perHourPrice,
-        this.priceCurrency,
-        this.image,
-        this.createdAt});
-
-  ServiceDetails.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    name = json['name'];
-    description = json['description'];
-    perHourPrice = json['per_hour_price'];
-    priceCurrency = json['price_currency'];
-    image = json['image'];
-    createdAt = json['created_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['per_hour_price'] = this.perHourPrice;
-    data['price_currency'] = this.priceCurrency;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    return data;
-  }
-}

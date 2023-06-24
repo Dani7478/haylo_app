@@ -31,7 +31,6 @@ class ApiService {
     var header = {
       'Authorization': 'Bearer $token',
     };
-    print(header);
     var apiUrl = Uri.parse(url);
 
     try {
@@ -42,7 +41,7 @@ class ApiService {
         customToast('Something went wrong');
       }
     } catch (error) {
-      customToast('Something went wrong');
+      customToast(error.toString());
     }
   }
 
@@ -50,13 +49,14 @@ class ApiService {
   getApiDatawithToken({url}) async {
     var token = await LocalStorage().getToken();
     var header = {
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
+
     };
 
     var apiUrl = Uri.parse(url);
     var response = await http.get(apiUrl, headers: header);
     if (response.statusCode == 200) {
-      print(response.body);
       return response.body;
     } else {
       customToast('Something went Wrong');
@@ -67,7 +67,6 @@ class ApiService {
     var apiUrl = Uri.parse(url);
     var response = await http.get(apiUrl);
     if (response.statusCode == 200) {
-      print(response.body);
       return response.body;
     } else {
       customToast('Something went Wrong');
@@ -78,11 +77,11 @@ class ApiService {
   getAllServices() async {
     var response = await getApiDatawithToken(url: serviceCatUrl);
     var jsonResponse = json.decode(response);
-    List<Service> serviceList = [];
+    List<Services> serviceList = [];
 
-    for (int i=0; i<jsonResponse['data'].length ;i++) {
-      print(jsonResponse['data'][i]);
-      Service service = Service.fromJson(jsonResponse['data'][i] as Map<String,dynamic>);
+    for (int i = 0; i < jsonResponse['data'].length; i++) {
+      Services service =
+          Services.fromJson(jsonResponse['data'][i] as Map<String, dynamic>);
       serviceList.add(service);
     }
     return serviceList;

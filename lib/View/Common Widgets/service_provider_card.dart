@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../Model/booker_home_model.dart';
+import '../../Model/service.dart';
 import '../Constants/colors.dart';
 import '../Constants/images.dart';
 import 'widgets_links.dart';
@@ -9,22 +11,16 @@ import 'widgets_links.dart';
 class ServiceProviderCard extends StatelessWidget {
   ServiceProviderCard(
       {super.key,
-      required this.image,
-      required this.rate,
-      required this.description,
-      required this.name,
-      required this.star});
-  String image;
-  double star;
-  String name;
-  String description;
-  int rate;
+      required this.recomendedService,
+     });
+
+  Services recomendedService;
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.only(top: 10.h),
-        // height: 200,
+         height: 147,
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         width: double.infinity,
         decoration: BoxDecoration(
@@ -34,14 +30,19 @@ class ServiceProviderCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 80.h,
+              height: 97.h,
               width: 80.h,
               decoration: BoxDecoration(
-                  color: grayColor, borderRadius: BorderRadius.circular(12.0)),
-              child: Image.asset(
-              image,
-                fit: BoxFit.fill,
+                  color: grayColor, borderRadius: BorderRadius.circular(12.0),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    recomendedService.image!,
+                  ),
+                  fit: BoxFit.fill,
+                )
+
               ),
+
             ),
             SizedBox(
               width: 10.w,
@@ -62,7 +63,7 @@ class ServiceProviderCard extends StatelessWidget {
                         width: 4.w,
                       ),
                       MainTextWidget(
-                          text: '$star',
+                          text: '0',
                           fontColor: textFieldTextColor,
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w500,
@@ -73,7 +74,7 @@ class ServiceProviderCard extends StatelessWidget {
                     height: 5.h,
                   ),
                   MainTextWidget(
-                      text: name,
+                      text: recomendedService.name!,
                       fontColor: textFieldTextColor,
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w600,
@@ -82,7 +83,7 @@ class ServiceProviderCard extends StatelessWidget {
                     height: 5.h,
                   ),
                   MainTextWidget(
-                      text: description,
+                      text: recomendedService.description!,
                       fontColor: textFieldTextColor,
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w300,
@@ -93,7 +94,7 @@ class ServiceProviderCard extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: MainTextWidget(
-                        text: 'Starting \$ $rate / Hour',
+                        text: 'Starting \$ ${recomendedService.perHourPrice} / Hour',
                         fontColor: purpleColor,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,

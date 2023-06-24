@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:haylo_app/View/Common%20Widgets/widgets_links.dart';
 import 'package:haylo_app/View/Screens/Authentication/login_view.dart';
 import 'package:haylo_app/View/Screens/Home/ProvideService/provider_paymentform_view.dart';
-
 import '../../../../Controller/Home/ProvideService/providersubmit_alluserdata.dart';
 import '../../../../Controller/controller_links.dart';
 import '../../../Constants/colors.dart';

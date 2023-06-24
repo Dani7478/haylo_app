@@ -144,7 +144,7 @@ class VarificationCodeView extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 8.0,
+                        height: 23.0,
                       ),
                       CustomButton2(
                           name: 'Verify Code',
